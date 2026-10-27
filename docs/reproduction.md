@@ -1,20 +1,22 @@
-# Reproduction protocol
+# GPU experiment protocol
 
-Run the commands below from the repository root. Use separate environments for data preparation, training, and serving, and a new output directory for each experiment.
+Run commands from the repository root. The workflow uses separate environments for preparation/evaluation, SFT training, and SGLang serving. Use new output directories for each experiment.
 
-## 1. Create environments
+## 1. Environments and GPU requirements
 
-Use Python 3.11 for the example setup. For data preparation and analysis:
+The SFT recipe uses three CUDA GPUs, bf16, full-parameter training of DeepSeek-R1-Distill-Qwen-7B, a sequence cutoff of 16,384, and ZeRO-3 parameter/optimizer CPU offload. Host RAM is used for offloaded parameters and optimizer states. A compatible CUDA toolkit and C++ compiler are required for DeepSpeed extensions; configure `CUDA_HOME` to the toolkit matching the installed PyTorch build.
+
+### Preparation, tree construction, and evaluation client
 
 ```bash
 python3.11 -m venv .venv
 source .venv/bin/activate
-python -m pip install -e '.[analysis]'
+python -m pip install -e '.[analysis,eval,tree]' 'huggingface_hub>=0.34,<1'
 ```
 
-Install `.[tree]` only if rebuilding trees. It adds PyTorch, Transformers, scikit-learn, and Flash-KMeans. The historical trees used Flash-KMeans, not the sklearn alternative. SPECTER2-style embeddings in this implementation are CLS embeddings from `allenai/specter2_base`, without an additional adapter. Exact tree identity depends on corpus order, embedding files, clustering implementation, and hardware; seed 42 alone is insufficient. Compare against the bundled tree fingerprints or obtain the original trees from the authors.
+The tree extra installs the embedding and clustering dependencies. `build_tree` uses CLS embeddings from `allenai/specter2_base` and Flash-KMeans with medoid representatives. Keep this environment active for dataset preparation, evaluation clients, and aggregation.
 
-For training, create a separate environment:
+### SFT training
 
 ```bash
 python3.11 -m venv .venv-train
@@ -23,42 +25,66 @@ python -m pip install -r requirements-training.txt
 python -m pip install -e .
 ```
 
-Training dependencies follow LLaMA-Factory 0.9.3's [dependency bounds](https://github.com/hiyouga/LLaMA-Factory/blob/v0.9.3/requirements.txt) and [DeepSpeed extra](https://github.com/hiyouga/LLaMA-Factory/blob/v0.9.3/setup.py). Record the CUDA and package versions used for each run.
+The training requirements specify LLaMA-Factory 0.9.3, PyTorch 2.7.1, Transformers 4.52.4, and DeepSpeed 0.16.9. Keep the installed CUDA/PyTorch combination compatible with the driver and extension build tools.
 
-## 2. Obtain or rebuild both trees
-
-Place data as described in [data.md](data.md). If rebuilding, use a new tree directory and run deliberately; these commands perform embedding inference and clustering:
+### SGLang serving
 
 ```bash
-python -m pip install -e '.[tree]'
-python -m soict_ir.build_tree \
+python3.11 -m venv .venv-serve
+source .venv-serve/bin/activate
+python -m pip install 'sglang[all]==0.4.9.post6'
+```
+
+SGLang 0.4.9.post6 was used for the scaled execution check. Resolve its dependencies for the host CUDA platform using the [SGLang documentation](https://docs.sglang.ai/). Record the resolved versions for your experiment. GPU memory requirements depend on context length, tensor parallelism, and concurrent requests; tune deployment capacity to your hardware while keeping the evaluation context and model declarations consistent.
+
+## 2. Download inputs and build the trees
+
+Activate `.venv` and follow [data.md](data.md) to download TOMATO-Star and the released IR conversations. Also download the backbone and public baseline:
+
+```bash
+source .venv/bin/activate
+hf download deepseek-ai/DeepSeek-R1-Distill-Qwen-7B
+hf download ZonglinY/MOOSE-Star-IR-R1D-7B
+```
+
+The training tree uses training inspirations. The evaluation tree uses a corpus assembled from training source papers, training inspirations, and held-out inspirations. Run these commands in order:
+
+```bash
+CUDA_VISIBLE_DEVICES=0 python -m soict_ir.build_tree \
   --sft_qa_jsonl data/raw/tomato_star/train.jsonl \
   --output_dir data/trees/training \
-  --branching_factor 15 --use_medoid 1 --seed 42 --kmeans_backend flash
+  --branching_factor 15 --use_medoid 1 --seed 42 \
+  --kmeans_backend flash --device cuda:0 --flash_kmeans_device cuda:0
 
 python -m soict_ir.corpus \
   --train-jsonl data/raw/tomato_star/train.jsonl \
   --test-jsonl data/raw/tomato_star/test.jsonl \
   --output-jsonl data/corpus/evaluation_papers.jsonl \
   --summary data/corpus/evaluation_summary.json
-python -m soict_ir.build_tree \
+
+CUDA_VISIBLE_DEVICES=0 python -m soict_ir.build_tree \
   --paper_jsonl data/corpus/evaluation_papers.jsonl \
   --output_dir data/trees/evaluation \
-  --branching_factor 15 --use_medoid 1 --seed 42 --kmeans_backend flash
+  --branching_factor 15 --use_medoid 1 --seed 42 \
+  --kmeans_backend flash --device cuda:0 --flash_kmeans_device cuda:0
 ```
 
-Use separate training and evaluation trees with seed42, branching factor15, maximum leaf depth5 and 768-dimensional embeddings. Rebuilding a different tree is a new realization of the method, not proof of exact reproduction. The historical builder can reuse embeddings in a directory, so use a fresh directory for a deliberate rebuild and archive its config and hashes.
+Tree construction uses `allenai/specter2_base` embeddings, downloaded automatically on first use. The evaluation commands below use `--tree-profile rebuilt` for these newly constructed trees.
 
-## 3. Construct the two fixed-budget datasets
+Trees use branching factor 15, medoid representatives, seed 42, maximum leaf depth 5, and 768-dimensional embeddings. The commands select GPU 0 for both embedding and clustering. Tree identity depends on input ordering, embeddings, clustering, and hardware; preserve each tree's configuration and hashes with the run.
+
+## 3. Prepare training and evaluation data
 
 ```bash
+python scripts/prepare_paper_selection.py \
+  --input-jsonl data/raw/sft/IR/train.jsonl \
+  --output-dir data/sft/paper_selection --max-examples 10000
+
 python -m soict_ir.supervision \
   --input-jsonl data/raw/tomato_star/train.jsonl \
   --tree-dir data/trees/training \
   --output-dir data/sft/child_subtree --max-examples 10000
-python scripts/prepare_paper_selection.py \
-  --input-jsonl data/raw/sft/IR/train.jsonl \
-  --output-dir data/sft/paper_selection --max-examples 10000
+
 python scripts/audit_training_data.py \
   --source-train data/raw/tomato_star/train.jsonl \
   --paper-sft data/sft/paper_selection/train.jsonl \
@@ -66,79 +92,179 @@ python scripts/audit_training_data.py \
   --output outputs/training_source_audit.json
 ```
 
-Sources are processed in input-file order. Targets are deduplicated in annotation order. Internal nodes are collected in first encounter order across target paths, deduplicated by node ID. Candidates follow tree child order. The SFT label is the child containing the first target whose path passes through that node. All positive children remain in metadata. The cap applies after expansion; the last source record can be only partially included. Renaming a tree directory changes the informational `tree_name` metadata; retain the historical basename to obtain byte-identical training files with the exact original inputs.
+Each preparation command writes `train.jsonl` and the `dataset_info.json` required by LLaMA-Factory. The audit records source overlap, example counts, and the depth distribution for reporting.
 
-Child-subtree assistant responses use the deterministic template in `build_assistant_response`.
+Paper-Selection preserves the ordered prefix of the released IR conversations. Child-Subtree expands source records in file order, deduplicates targets in annotation order, and visits internal nodes in first encounter order. Candidate order follows tree child order. The label selects the child containing the first target whose path passes through the current node; metadata retains all positive children. The 10,000-example limit is applied after expansion.
 
-## 4. Train from the same backbone
-
-```bash
-source .venv-train/bin/activate
-FORCE_TORCHRUN=1 NPROC_PER_NODE=3 llamafactory-cli train configs/paper_selection.yaml
-FORCE_TORCHRUN=1 NPROC_PER_NODE=3 llamafactory-cli train configs/child_subtree.yaml
-```
-
-Both configurations preserve full-parameter SFT, seed 42, one epoch, learning rate 1e-5, cosine schedule, 5% warmup, weight decay .01, bf16, batch 1 per device, accumulation 1, cutoff 16,384, max gradient norm .5, SDPA, and ZeRO-3 parameter/optimizer CPU offload. They start independently from the same backbone. Run from this directory so relative paths resolve correctly. Use three GPUs to preserve the historical effective batch and schedule. Changing world size changes optimization.
-
-## 5. Evaluate local decisions at D0–D4
-
-Create a separate serving environment using a compatible SGLang version and record the exact GPU/CUDA/package versions. The training requirements are not a serving environment. The following interface is an example; the exact commands and configurations should be checked against your own environment:
+Prepare the held-out evaluation inputs:
 
 ```bash
-python -m sglang.launch_server \
-  --model-path outputs/paper_selection/checkpoint-3334 \
-  --served-model-name soict-repro --context-length 16384 \
-  --host 127.0.0.1 --port 30003
-```
-
-`configs/models.example.json` declares the four model identities and five context deployments. Copy it to a local JSON file and update actual checkpoint paths, distinct served names and endpoints. The same checkpoint must be used for a model's two evaluation formats. Advertised `/models` names are checked before explicit execution; this verifies a name, not weight hashes or actual context capacity. Checkpoint paths and context lengths are operator declarations and remain labeled as such. Model servers are started manually. A server may be stopped by its operator after its conditions complete and the next model may then be served at its declared endpoint; simultaneous serving of all models is not required.
-
-In the preparation/evaluation environment:
-
-```bash
-source .venv/bin/activate
-python -m pip install -e '.[eval]'
 python scripts/split_eval.py \
   --input-jsonl data/raw/tomato_star/test.jsonl --output-dir data/eval
 ```
 
-### Seven-condition matrix
-
-All commands below are **dry-runs**. They resolve actual settings and commands without loading weights, contacting servers, or creating run output directories. Add `--execute` only when deliberately running an evaluation with the corresponding server already available. Use a new output directory on every attempt.
+## 4. Train the two SFT models
 
 ```bash
-python scripts/run_paper_experiments.py --condition base_child --model-map configs/models.example.json --output-dir outputs/base_child_run
-python scripts/run_paper_experiments.py --condition public_child --model-map configs/models.example.json --output-dir outputs/public_child_run
-python scripts/run_paper_experiments.py --condition public_original --model-map configs/models.example.json --output-dir outputs/public_original_run
-python scripts/run_paper_experiments.py --condition repro_child --model-map configs/models.example.json --output-dir outputs/repro_child_run
-python scripts/run_paper_experiments.py --condition repro_original --model-map configs/models.example.json --output-dir outputs/repro_original_run
-python scripts/run_paper_experiments.py --condition child_child --model-map configs/models.example.json --output-dir outputs/child_child_run
-python scripts/run_paper_experiments.py --condition child_original --model-map configs/models.example.json --output-dir outputs/child_original_run
+source .venv-train/bin/activate
+CUDA_VISIBLE_DEVICES=0,1,2 FORCE_TORCHRUN=1 NPROC_PER_NODE=3 \
+  llamafactory-cli train configs/paper_selection.yaml
+CUDA_VISIBLE_DEVICES=0,1,2 FORCE_TORCHRUN=1 NPROC_PER_NODE=3 \
+  llamafactory-cli train configs/child_subtree.yaml
 ```
 
-Use `--condition all` for one plan covering all seven conditions. `--plan-output outputs/plan.json` saves a new plan file. `--inspect-inputs` additionally hashes local data/tree files on CPU; it still makes no requests. Resolved per-evaluation commands reference source/run-spec files written by the explicit suite executor, so execute through the runner rather than copying an unprepared inner command from a dry-run JSON.
+Run these jobs sequentially. Both start from `deepseek-ai/DeepSeek-R1-Distill-Qwen-7B`, with 10,000 examples, seed 42, one epoch, learning rate 1e-5, cosine scheduling, 5% warmup, weight decay 0.01, per-device batch size 1, accumulation 1, gradient clipping 0.5, bf16, SDPA, gradient checkpointing, and ZeRO-3 CPU offload. Three GPUs give an effective batch size of 3. Changing GPU count or accumulation changes the optimization schedule.
 
+Use each model's final epoch checkpoint. The supplied recipe uses step 3,334; the examples below expect `outputs/paper_selection/checkpoint-3334` and `outputs/child_subtree/checkpoint-3334`. Confirm the saved final checkpoint paths, including tokenizer files and `chat_template.jinja`, and update the model map and serving commands together if paths differ.
 
-Serve models sequentially if needed, then merge validated condition suites:
+## 5. Serve and evaluate all seven conditions
+
+Create a local model map in the preparation/evaluation terminal:
 
 ```bash
-python scripts/merge_paper_suites.py --suite-dirs outputs/base_child_run outputs/public_child_run outputs/public_original_run outputs/repro_child_run outputs/repro_original_run outputs/child_child_run outputs/child_original_run --output-dir outputs/paper_merged
-python scripts/audit_corpus.py --source-train data/raw/tomato_star/train.jsonl --source-test data/raw/tomato_star/test.jsonl --tree-dir data/trees/evaluation --output outputs/corpus_audit.json --tree-summary outputs/tree_granularity.json
-python scripts/make_paper_report.py --suite-dir outputs/paper_merged --output-dir outputs/report --tree-summary outputs/tree_granularity.json --training-audit outputs/training_source_audit.json --corpus-audit outputs/corpus_audit.json
+source .venv/bin/activate
+cp configs/models.example.json configs/models.local.json
 ```
 
-Use the final epoch checkpoint-3334 for each independently trained model; do not select on held-out accuracy. Both training datasets contain exactly 10,000 examples. Training and evaluation trees are separate. Historical tree sizes or source coverage observations are not promises about rebuilt artifacts.
+The five deployments below match its served names, context lengths, and ports. Models can be run sequentially on GPU 0. For each deployment, start the server in a separate terminal, wait until it is ready, then run the corresponding evaluation command in the `.venv` terminal. After that evaluation finishes, stop that server with Ctrl-C before starting the next deployment on the same GPU.
 
-Historical tree mode checks the structure/papers/config hashes in configs/historical_tree_identity.json. A deliberately rebuilt tree requires explicit --tree-profile rebuilt; the code never falls back silently. Toy mode requires a toy tree and cannot establish paper completeness.
+The commands use `--tree-profile rebuilt` for trees constructed in step 2. Use `historical` only with the exact tree described in `configs/historical_tree_identity.json`. Evaluation is triggered by `--execute`; omitting it prints the execution plan.
 
-The report requires valid source sets, five depths, protocol/model consistency, integer corpus count relationships, fixed 10,000-example budgets and the pinned 159-field output schema. Null/bool/float budgets and impossible corpus counts are errors in strict and partial mode. Consistent incomplete mapping/depth coverage is partial with explicit missing reasons. A subset or mutation of the inventory is always rejected.
+### A. Backbone: Child-Subtree
 
-The report generates four tables, two figures, corpus counts, model differences, macro differences, exact McNemar tests, and paired bootstrap intervals from the experiment inputs. Missing values are marked as `NA`. `--skip-statistics` produces a partial report; install the analysis extra to compute statistics.
+Server:
 
-Bootstrap uses 5,000 paired draws at seed 42, one PCG64 generator advanced through D0–D4, sorted source IDs, and linear percentile quantiles. The intervals quantify source-sampling uncertainty.
+```bash
+source .venv-serve/bin/activate
+CUDA_VISIBLE_DEVICES=0 python -m sglang.launch_server \
+  --model-path deepseek-ai/DeepSeek-R1-Distill-Qwen-7B \
+  --served-model-name soict-base --host 127.0.0.1 --port 30000 \
+  --context-length 16384 --tp 1 --dtype bfloat16
+```
 
-Corrected Top-k removes ranks on failed-format parents, takes the best valid rank across a source's parents, and keeps all evaluation sources in its denominator. Mean/median are conditional on having a valid rank. Top-1 uses actual correctness rather than candidate-order ties. Local depths are evaluated independently, not end-to-end traversal.
+Evaluation:
 
+```bash
+python scripts/run_paper_experiments.py \
+  --condition base_child --model-map configs/models.local.json \
+  --tree-profile rebuilt --output-dir outputs/base_run --execute
+```
 
-The main figure supports the full 0–100% accuracy range in SVG and TeX, with space above the bars and a separate legend. Missing values remain NA. Display changes do not alter CSV values or statistical calculations.
+### B. Public MOOSE-Star IR: Child-Subtree
 
+Server:
+
+```bash
+source .venv-serve/bin/activate
+CUDA_VISIBLE_DEVICES=0 python -m sglang.launch_server \
+  --model-path ZonglinY/MOOSE-Star-IR-R1D-7B \
+  --served-model-name soict-public --host 127.0.0.1 --port 30001 \
+  --context-length 16384 --tp 1 --dtype bfloat16
+```
+
+Evaluation:
+
+```bash
+python scripts/run_paper_experiments.py \
+  --condition public_child --model-map configs/models.local.json \
+  --tree-profile rebuilt --output-dir outputs/public_child_run --execute
+```
+
+### C. Public MOOSE-Star IR: Original IR
+
+Serve the same checkpoint at the Original IR context length:
+
+```bash
+source .venv-serve/bin/activate
+CUDA_VISIBLE_DEVICES=0 python -m sglang.launch_server \
+  --model-path ZonglinY/MOOSE-Star-IR-R1D-7B \
+  --served-model-name soict-public --host 127.0.0.1 --port 30002 \
+  --context-length 32768 --tp 1 --dtype bfloat16
+```
+
+Evaluation:
+
+```bash
+python scripts/run_paper_experiments.py \
+  --condition public_original --model-map configs/models.local.json \
+  --tree-profile rebuilt --output-dir outputs/public_original_run --execute
+```
+
+### D. Paper-Selection SFT: both formats
+
+Server:
+
+```bash
+source .venv-serve/bin/activate
+CUDA_VISIBLE_DEVICES=0 python -m sglang.launch_server \
+  --model-path outputs/paper_selection/checkpoint-3334 \
+  --served-model-name soict-repro --host 127.0.0.1 --port 30003 \
+  --context-length 16384 --tp 1 --dtype bfloat16 \
+  --chat-template outputs/paper_selection/checkpoint-3334/chat_template.jinja
+```
+
+Evaluation:
+
+```bash
+python scripts/run_paper_experiments.py \
+  --condition repro_child repro_original \
+  --model-map configs/models.local.json --tree-profile rebuilt \
+  --output-dir outputs/repro_run --execute
+```
+
+### E. Child-Subtree SFT: both formats
+
+Server:
+
+```bash
+source .venv-serve/bin/activate
+CUDA_VISIBLE_DEVICES=0 python -m sglang.launch_server \
+  --model-path outputs/child_subtree/checkpoint-3334 \
+  --served-model-name soict-child --host 127.0.0.1 --port 30004 \
+  --context-length 16384 --tp 1 --dtype bfloat16 \
+  --chat-template outputs/child_subtree/checkpoint-3334/chat_template.jinja
+```
+
+Evaluation:
+
+```bash
+python scripts/run_paper_experiments.py \
+  --condition child_child child_original \
+  --model-map configs/models.local.json --tree-profile rebuilt \
+  --output-dir outputs/child_run --execute
+```
+
+The runner verifies the server's advertised model name against the map. Keep each model's checkpoint identical across its two formats. `configs/experiments.json` defines generation limits (512 for Base, 2,048 for fine-tuned models), top-30 log probabilities, and retry/worker settings. Context length and generation length are separate settings. Evaluation measures local decisions independently at D0–D4.
+
+## 6. Aggregate experiments and generate figures and tables
+
+Activate `.venv` after completing the five suite directories in the protocol:
+
+```bash
+source .venv/bin/activate
+python scripts/merge_paper_suites.py \
+  --suite-dirs outputs/base_run outputs/public_child_run \
+    outputs/public_original_run outputs/repro_run outputs/child_run \
+  --output-dir outputs/paper_merged
+
+python scripts/audit_corpus.py \
+  --source-train data/raw/tomato_star/train.jsonl \
+  --source-test data/raw/tomato_star/test.jsonl \
+  --tree-dir data/trees/evaluation \
+  --output outputs/corpus_audit.json \
+  --tree-summary outputs/tree_granularity.json
+
+python scripts/make_paper_report.py \
+  --suite-dir outputs/paper_merged --output-dir outputs/report \
+  --tree-summary outputs/tree_granularity.json \
+  --training-audit outputs/training_source_audit.json \
+  --corpus-audit outputs/corpus_audit.json
+```
+
+The report produces two figures, four tables, depth-wise accuracy, Top-k metrics, exact McNemar tests, and paired bootstrap confidence intervals. See the [output inventory](manuscript_coverage.md) for the generated files.
+
+Reports require all seven conditions, five-depth coverage of the same 1,658 sources, consistent model/tree settings, valid corpus counts, and both 10,000-example training audits. Use `--allow-partial` to inspect an unfinished run, with missing fields marked as `NA`.
+
+Top-k uses the best valid positive rank across a source's parent decisions; failed-format parents contribute no rank, and all sources remain in the denominator. Mean/median ranks are conditional on a valid rank. Top-1 uses source-level correctness.
+
+Paired bootstrap uses 5,000 draws, seed 42, a PCG64 generator advanced through D0–D4, sorted source IDs, and linear percentile quantiles. Confidence intervals quantify source-sampling uncertainty. Exact McNemar tests compare paired source outcomes.
