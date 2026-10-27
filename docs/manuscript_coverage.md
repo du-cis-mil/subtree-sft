@@ -1,8 +1,6 @@
-# Output coverage / 出力台帳
+# Figures, tables, and report fields
 
-configs/output_schema.json is schema2: a pinned inventory of all 159 output fields with the same IDs, computation paths, locations, precision/types and two-figure/four-table labels as the reviewed paper inventory. Historical expected numbers are not distributed. Changing or reducing this inventory is rejected even in partial mode.
-
-固定159項目は利用者の実入力から計算し、computed_value / unverified / method_descriptionで区別します。原稿値は非同梱で、未比較を一致と表示しません。旧schema1の過去比較機能は別経路として保持しています。
+`configs/output_schema.json` defines 159 report fields, including their identifiers, computation paths, locations, types, and precision. The report validates this inventory and calculates each field from the experiment inputs. Fields distinguish computed values, method descriptions, and values requiring further inputs.
 
 | Label | Generated files |
 |---|---|
@@ -13,4 +11,4 @@ configs/output_schema.json is schema2: a pinned inventory of all 159 output fiel
 | tab:sample_level | public_topk_corrected.csv/.tex/.json |
 | tab:prompt_ablation | ablation.csv/.tex (six rows) |
 
-Body outputs include corpus_counts, parent_counts, text_comparisons, paired_tests, main_paired_statistics, ci_comparison, computed_values and per-field coverage. CI comparison references state not provided. --skip-statistics marks missing computations; --allow-partial never bypasses malformed inputs. See README and reproduction protocol for completion definitions.
+Body outputs include corpus_counts, parent_counts, text_comparisons, paired_tests, main_paired_statistics, ci_comparison, computed_values and per-field coverage. `--skip-statistics` marks the report as partial. `--allow-partial` reports missing inputs while retaining schema and input validation. See the [experiment protocol](reproduction.md) for the full workflow.

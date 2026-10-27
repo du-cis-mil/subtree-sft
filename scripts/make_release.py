@@ -8,7 +8,7 @@ import zipfile
 
 ROOT = Path(__file__).resolve().parents[1]
 DIRECTORIES = {"src", "scripts", "configs", "docs", "tests", "examples", ".github"}
-TOP_FILES = {"README.md", "README.ja.md", "LICENSE", "NOTICE", "CITATION.cff", "PROVENANCE.json",
+TOP_FILES = {"README.md", "LICENSE", "NOTICE", "CITATION.cff", "PROVENANCE.json",
              "pyproject.toml", "requirements-training.txt", ".gitignore"}
 SKIP = {"__pycache__", ".pytest_cache", ".git", "node_modules"}
 SECRET = re.compile(r"(?:ghp_[A-Za-z0-9]{30,}|github_pat_[A-Za-z0-9_]{30,}|sk-[A-Za-z0-9]{24,}|AKIA[0-9A-Z]{16}|-----BEGIN (?:RSA |OPENSSH |EC )?PRIVATE KEY-----)")

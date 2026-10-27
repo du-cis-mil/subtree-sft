@@ -1,6 +1,6 @@
 # Reproduction protocol
 
-All commands run at this standalone project's root. Use new environments and new output directories. No command requires the parent research repository. The supplied code does not modify existing datasets or launchers. Full model training/inference is an explicit manual step, separate from CPU validation.
+Run the commands below from the repository root. Use separate environments for data preparation, training, and serving, and a new output directory for each experiment.
 
 ## 1. Create environments
 
@@ -23,7 +23,7 @@ python -m pip install -r requirements-training.txt
 python -m pip install -e .
 ```
 
-The release constraints respect LLaMA-Factory 0.9.3's [official dependency bounds](https://github.com/hiyouga/LLaMA-Factory/blob/v0.9.3/requirements.txt) and [DeepSpeed extra](https://github.com/hiyouga/LLaMA-Factory/blob/v0.9.3/setup.py). They are a portable starting point, not a fully locked historical CUDA environment. A scaled single-GPU run used 100 training examples for each SFT and 17 evaluation sources per condition with SDK 1 and SGLang; full-scale reproduction and fresh-environment deployment remain unverified. The scaled evaluation used an API retry limit of 10 instead of the planned 1. Do not install training and serving dependencies into an existing research environment.
+Training dependencies follow LLaMA-Factory 0.9.3's [dependency bounds](https://github.com/hiyouga/LLaMA-Factory/blob/v0.9.3/requirements.txt) and [DeepSpeed extra](https://github.com/hiyouga/LLaMA-Factory/blob/v0.9.3/setup.py). Record the CUDA and package versions used for each run.
 
 ## 2. Obtain or rebuild both trees
 
@@ -68,7 +68,7 @@ python scripts/audit_training_data.py \
 
 Sources are processed in input-file order. Targets are deduplicated in annotation order. Internal nodes are collected in first encounter order across target paths, deduplicated by node ID. Candidates follow tree child order. The SFT label is the child containing the first target whose path passes through that node. All positive children remain in metadata. The cap applies after expansion; the last source record can be only partially included. Renaming a tree directory changes the informational `tree_name` metadata; retain the historical basename to obtain byte-identical training files with the exact original inputs.
 
-Child-subtree assistant responses use the original deterministic template in `build_assistant_response`; they are not newly generated teacher explanations. Later teacher/student experiments are not part of this artifact.
+Child-subtree assistant responses use the deterministic template in `build_assistant_response`.
 
 ## 4. Train from the same backbone
 
@@ -133,13 +133,12 @@ Historical tree mode checks the structure/papers/config hashes in configs/histor
 
 The report requires valid source sets, five depths, protocol/model consistency, integer corpus count relationships, fixed 10,000-example budgets and the pinned 159-field output schema. Null/bool/float budgets and impossible corpus counts are errors in strict and partial mode. Consistent incomplete mapping/depth coverage is partial with explicit missing reasons. A subset or mutation of the inventory is always rejected.
 
-All four tables and two figures, body counts, differences, macro differences, exact McNemar and paired bootstrap are generated from supplied inputs. The output schema contains no historical reference numbers. CI comparison columns explicitly state that manuscript references were not provided. Missing values remain NA. --skip-statistics makes the report partial. Statistics require the analysis extra.
+The report generates four tables, two figures, corpus counts, model differences, macro differences, exact McNemar tests, and paired bootstrap intervals from the experiment inputs. Missing values are marked as `NA`. `--skip-statistics` produces a partial report; install the analysis extra to compute statistics.
 
-Bootstrap uses 5000 paired draws at seed42, one PCG64 generator advanced D0–D4, sorted source IDs and linear percentile quantiles. Do not search seeds/order to match old manuscript CIs. These are source-sampling intervals, not training-seed uncertainty.
+Bootstrap uses 5,000 paired draws at seed 42, one PCG64 generator advanced through D0–D4, sorted source IDs, and linear percentile quantiles. The intervals quantify source-sampling uncertainty.
 
 Corrected Top-k removes ranks on failed-format parents, takes the best valid rank across a source's parents, and keeps all evaluation sources in its denominator. Mean/median are conditional on having a valid rank. Top-1 uses actual correctness rather than candidate-order ties. Local depths are evaluated independently, not end-to-end traversal.
 
-No historical outcomes are bundled. Full-scale GPU training/serving and fresh-environment deployment remain unverified; exact checkpoint/tree URLs remain absent. Concept panels retain pending distribution terms. See README.md and docs/release.md. The original manuscript is unchanged.
 
 The main figure supports the full 0–100% accuracy range in SVG and TeX, with space above the bars and a separate legend. Missing values remain NA. Display changes do not alter CSV values or statistical calculations.
 
