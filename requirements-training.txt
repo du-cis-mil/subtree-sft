@@ -1,0 +1,12 @@
+# Isolated environment only. Historical research pins; not a fresh GPU validation.
+torch==2.7.1
+transformers==4.52.4
+tokenizers==0.21.1
+llamafactory==0.9.3
+accelerate==1.7.0
+peft==0.15.2
+trl==0.9.6
+datasets==3.6.0
+deepspeed==0.16.9
+numpy==1.26.4
+tensorboard>=2.14.0

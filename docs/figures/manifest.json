@@ -1,0 +1,27 @@
+{
+  "schema_version": 1,
+  "figure_label": "fig:method_overview",
+  "assets": [
+    {
+      "panel": "a",
+      "path": "docs/figures/figure_child_subtree_selection_supervision_innerlabels_transparent.png",
+      "source": "manuscript images/figure_child_subtree_selection_supervision_innerlabels_transparent.png",
+      "sha256": "9f2a95a63fde4eddc472157b07990a08f721776c63543b99f982136250602997",
+      "bytes": 435883,
+      "media_type": "image/png",
+      "license_status": "author_confirmation_required",
+      "license_note": "Manuscript figure asset; redistribution permission and figure-specific terms have not been established. Not automatically covered by the code license."
+    },
+    {
+      "panel": "b",
+      "path": "docs/figures/figure_candidate_granularity_compact_transparent.png",
+      "source": "manuscript images/figure_candidate_granularity_compact_transparent.png",
+      "sha256": "6effb94ee161c3dc0441f3de72736808139c5e522a8decc217ebac8ec48d2aad",
+      "bytes": 514614,
+      "media_type": "image/png",
+      "license_status": "author_confirmation_required",
+      "license_note": "Manuscript figure asset; redistribution permission and figure-specific terms have not been established. Not automatically covered by the code license."
+    }
+  ],
+  "redistribution_ready": false
+}

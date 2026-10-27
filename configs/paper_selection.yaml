@@ -1,0 +1,46 @@
+# SoICT final-epoch training configuration; portable paths.
+model_name_or_path: deepseek-ai/DeepSeek-R1-Distill-Qwen-7B
+template: deepseekr1
+dataset_dir: ./data/sft/paper_selection
+dataset: train
+tokenized_path: ./cache/paper_selection
+
+finetuning_type: full
+
+stage: sft
+do_train: true
+mask_history: true
+disable_shuffling: false
+seed: 42
+
+cutoff_len: 16384
+packing: false
+per_device_train_batch_size: 1
+gradient_accumulation_steps: 1
+
+preprocessing_num_workers: 8
+overwrite_cache: true
+
+learning_rate: 1.0e-5
+lr_scheduler_type: cosine
+warmup_ratio: 0.05
+weight_decay: 0.01
+num_train_epochs: 1
+max_grad_norm: 0.5
+
+bf16: true
+fp16: false
+gradient_checkpointing: true
+flash_attn: sdpa
+
+deepspeed: ./configs/deepspeed_zero3_cpu_offload.json
+
+do_eval: false
+
+save_strategy: "steps"
+save_steps: 334
+save_total_limit: 12
+logging_steps: 1
+report_to: tensorboard
+
+output_dir: ./outputs/paper_selection

@@ -1,0 +1,11 @@
+{
+  "evaluation_tree_structure": {
+    "sha256": "511215dfb9747669c4242661414773daa5bce0d668ea7bdfcbde61008a4dc3be"
+  },
+  "evaluation_tree_papers": {
+    "sha256": "bb7786856e675cdcf4d9ac1193a001347e1af5ad4aac164961f0f6d521bb12f5"
+  },
+  "evaluation_tree_config": {
+    "sha256": "d44898ced0f58a51d6b93efc66e63c281025ed44e59d6f39e66a06cad7dcf88e"
+  }
+}

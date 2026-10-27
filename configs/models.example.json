@@ -1,0 +1,9 @@
+{
+  "note": "Explicit operator declarations, not proof of checkpoint weights. Start these servers manually; dry-run makes no network calls.",
+  "models": {
+    "base": {"checkpoint": "deepseek-ai/DeepSeek-R1-Distill-Qwen-7B", "served_model_name": "soict-base", "deployments": [{"context_length": 16384, "urls": ["http://127.0.0.1:30000/v1"]}]},
+    "public": {"checkpoint": "ZonglinY/MOOSE-Star-IR-R1D-7B", "served_model_name": "soict-public", "deployments": [{"context_length": 16384, "urls": ["http://127.0.0.1:30001/v1"]}, {"context_length": 32768, "urls": ["http://127.0.0.1:30002/v1"]}]},
+    "repro": {"checkpoint": "outputs/paper_selection/checkpoint-3334", "served_model_name": "soict-repro", "deployments": [{"context_length": 16384, "urls": ["http://127.0.0.1:30003/v1"]}]},
+    "child": {"checkpoint": "outputs/child_subtree/checkpoint-3334", "served_model_name": "soict-child", "deployments": [{"context_length": 16384, "urls": ["http://127.0.0.1:30004/v1"]}]}
+  }
+}

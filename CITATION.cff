@@ -1,0 +1,16 @@
+cff-version: 1.2.0
+message: "If you use this code, please cite the associated SoICT manuscript and MOOSE-Star."
+type: software
+title: "From Paper Selection to Child-Subtree Selection: Task-Aligned SFT for Hierarchical Scientific Literature Retrieval"
+version: 0.5.1
+license: Apache-2.0
+authors:
+  - family-names: Yoshimaru
+    given-names: Naoki
+    orcid: "https://orcid.org/0009-0001-0385-594X"
+  - family-names: Kawano
+    given-names: Hibiki
+    orcid: "https://orcid.org/0009-0002-3812-7229"
+  - family-names: Hatano
+    given-names: Kenji
+    orcid: "https://orcid.org/0000-0001-7079-8247"

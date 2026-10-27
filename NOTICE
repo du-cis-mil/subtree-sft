@@ -1,0 +1,23 @@
+SoICT Child-Subtree Selection research artifact
+
+This artifact includes code and prompt text derived from MOOSE-Star:
+Copyright 2025 Zonglin Yang
+https://github.com/ZonglinY/MOOSE-Star
+Reference revision: 41a90cc94cc4d162c2cffc9d3d4db93571158f99
+Licensed under the Apache License, Version 2.0; see LICENSE.
+
+Local research extensions and the standalone extraction add child-subtree
+supervision, depth-wise evaluation, data preparation, portable entry points,
+artifact audits, and documentation. Modified code files carry a release notice.
+The upstream revision is recorded in PROVENANCE.json. Per-file SHA-256
+fingerprints of the release contents are recorded in the ZIP's SHA256SUMS.
+
+This code license does not change the terms of separately obtained datasets,
+pretrained models, checkpoints, or third-party software. Dataset attribution:
+TOMATO-Star / MOOSE-Star, Zonglin Yang and collaborators; see docs/data.md.
+
+The two manuscript PNG panels under docs/figures and their copies in the
+generated report are separate figure assets. Their redistribution terms
+require author confirmation and have not been established by the code
+license. See docs/figures/manifest.json. Inclusion in a review archive does
+not establish permission for public redistribution.

@@ -1,0 +1,24 @@
+{
+  "schema_version": 1,
+  "training": {
+    "backbone": "deepseek-ai/DeepSeek-R1-Distill-Qwen-7B",
+    "seed": 42, "examples_per_model": 10000, "gpus": 3,
+    "paper_selection": "configs/paper_selection.yaml",
+    "child_subtree": "configs/child_subtree.yaml",
+    "checkpoint_policy": "final epoch checkpoint-3334; no held-out selection"
+  },
+  "evaluation": {
+    "sources": 1658, "parent_counts": [1658, 2575, 2895, 3027, 3081],
+    "top_logprobs": 30, "api_max_retries": 10, "format_max_retries": 1,
+    "workers": 12, "extractor_version": "legacy", "format_error_ranks": "legacy"
+  },
+  "conditions": {
+    "base_child": {"model": "base", "prompt": "child-subtree", "max_tokens": 512, "context_length": 16384, "historical_context_length": null, "settings_evidence": "partial: historical context unknown; planned context 16384"},
+    "public_child": {"model": "public", "prompt": "child-subtree", "max_tokens": 2048, "context_length": 16384, "historical_context_length": 16384, "settings_evidence": "saved launch settings and complete evaluation log"},
+    "public_original": {"model": "public", "prompt": "original", "max_tokens": 2048, "context_length": 32768, "historical_context_length": 32768, "settings_evidence": "saved launch settings and complete evaluation log"},
+    "repro_child": {"model": "repro", "prompt": "child-subtree", "max_tokens": 2048, "context_length": 16384, "historical_context_length": null, "settings_evidence": "new recipe matched to repro_original; historical settings/outcomes unverified"},
+    "repro_original": {"model": "repro", "prompt": "original", "max_tokens": 2048, "context_length": 16384, "historical_context_length": 16384, "settings_evidence": "saved launch settings and complete evaluation log"},
+    "child_child": {"model": "child", "prompt": "child-subtree", "max_tokens": 2048, "context_length": 16384, "historical_context_length": 16384, "settings_evidence": "saved launch settings"},
+    "child_original": {"model": "child", "prompt": "original", "max_tokens": 2048, "context_length": 16384, "historical_context_length": 16384, "settings_evidence": "matching settings for original and remaining parts; merged result"}
+  }
+}

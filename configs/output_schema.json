@@ -1,0 +1,2347 @@
+{
+  "manuscript_sha256": "d82c4b7f67b83bb651b2ad3d7d2a7e61becf6646dfa619d2ceb1265fdbc32c4b",
+  "figures": [
+    "fig:method_overview",
+    "fig:depthwise_top1"
+  ],
+  "tables": [
+    "tab:implementation",
+    "tab:tree_granularity",
+    "tab:sample_level",
+    "tab:prompt_ablation"
+  ],
+  "schema_version": 2,
+  "scope": "All 159 output fields for the SoICT experiments; historical reference values are not distributed.",
+  "claims": [
+    {
+      "id": "accuracy.base_child.D0",
+      "computed_path": "accuracy/base_child/D0",
+      "locations": [
+        {
+          "section": "Effect of Child-Subtree SFT",
+          "lines": "429-539",
+          "label": "fig:depthwise_top1"
+        }
+      ],
+      "value_type": "float",
+      "decimals": 2
+    },
+    {
+      "id": "accuracy.base_child.D1",
+      "computed_path": "accuracy/base_child/D1",
+      "locations": [
+        {
+          "section": "Effect of Child-Subtree SFT",
+          "lines": "429-539",
+          "label": "fig:depthwise_top1"
+        }
+      ],
+      "value_type": "float",
+      "decimals": 2
+    },
+    {
+      "id": "accuracy.base_child.D2",
+      "computed_path": "accuracy/base_child/D2",
+      "locations": [
+        {
+          "section": "Effect of Child-Subtree SFT",
+          "lines": "429-539",
+          "label": "fig:depthwise_top1"
+        }
+      ],
+      "value_type": "float",
+      "decimals": 2
+    },
+    {
+      "id": "accuracy.base_child.D3",
+      "computed_path": "accuracy/base_child/D3",
+      "locations": [
+        {
+          "section": "Effect of Child-Subtree SFT",
+          "lines": "429-539",
+          "label": "fig:depthwise_top1"
+        }
+      ],
+      "value_type": "float",
+      "decimals": 2
+    },
+    {
+      "id": "accuracy.base_child.D4",
+      "computed_path": "accuracy/base_child/D4",
+      "locations": [
+        {
+          "section": "Effect of Child-Subtree SFT",
+          "lines": "429-539",
+          "label": "fig:depthwise_top1"
+        }
+      ],
+      "value_type": "float",
+      "decimals": 2
+    },
+    {
+      "id": "accuracy.base_child.Overall",
+      "computed_path": "accuracy/base_child/Overall",
+      "locations": [
+        {
+          "section": "Effect of Child-Subtree SFT",
+          "lines": "429-539",
+          "label": "fig:depthwise_top1"
+        }
+      ],
+      "value_type": "float",
+      "decimals": 2
+    },
+    {
+      "id": "accuracy.public_child.D0",
+      "computed_path": "accuracy/public_child/D0",
+      "locations": [
+        {
+          "section": "Format Ablation",
+          "lines": "550-584",
+          "label": "tab:prompt_ablation"
+        }
+      ],
+      "value_type": "float",
+      "decimals": 2
+    },
+    {
+      "id": "accuracy.public_child.D1",
+      "computed_path": "accuracy/public_child/D1",
+      "locations": [
+        {
+          "section": "Format Ablation",
+          "lines": "550-584",
+          "label": "tab:prompt_ablation"
+        }
+      ],
+      "value_type": "float",
+      "decimals": 2
+    },
+    {
+      "id": "accuracy.public_child.D2",
+      "computed_path": "accuracy/public_child/D2",
+      "locations": [
+        {
+          "section": "Format Ablation",
+          "lines": "550-584",
+          "label": "tab:prompt_ablation"
+        }
+      ],
+      "value_type": "float",
+      "decimals": 2
+    },
+    {
+      "id": "accuracy.public_child.D3",
+      "computed_path": "accuracy/public_child/D3",
+      "locations": [
+        {
+          "section": "Format Ablation",
+          "lines": "550-584",
+          "label": "tab:prompt_ablation"
+        }
+      ],
+      "value_type": "float",
+      "decimals": 2
+    },
+    {
+      "id": "accuracy.public_child.D4",
+      "computed_path": "accuracy/public_child/D4",
+      "locations": [
+        {
+          "section": "Format Ablation",
+          "lines": "550-584",
+          "label": "tab:prompt_ablation"
+        }
+      ],
+      "value_type": "float",
+      "decimals": 2
+    },
+    {
+      "id": "accuracy.public_child.Overall",
+      "computed_path": "accuracy/public_child/Overall",
+      "locations": [
+        {
+          "section": "Format Ablation",
+          "lines": "550-584",
+          "label": "tab:prompt_ablation"
+        }
+      ],
+      "value_type": "float",
+      "decimals": 2
+    },
+    {
+      "id": "accuracy.public_original.D0",
+      "computed_path": "accuracy/public_original/D0",
+      "locations": [
+        {
+          "section": "Format Ablation",
+          "lines": "550-584",
+          "label": "tab:prompt_ablation"
+        }
+      ],
+      "value_type": "float",
+      "decimals": 2
+    },
+    {
+      "id": "accuracy.public_original.D1",
+      "computed_path": "accuracy/public_original/D1",
+      "locations": [
+        {
+          "section": "Format Ablation",
+          "lines": "550-584",
+          "label": "tab:prompt_ablation"
+        }
+      ],
+      "value_type": "float",
+      "decimals": 2
+    },
+    {
+      "id": "accuracy.public_original.D2",
+      "computed_path": "accuracy/public_original/D2",
+      "locations": [
+        {
+          "section": "Format Ablation",
+          "lines": "550-584",
+          "label": "tab:prompt_ablation"
+        }
+      ],
+      "value_type": "float",
+      "decimals": 2
+    },
+    {
+      "id": "accuracy.public_original.D3",
+      "computed_path": "accuracy/public_original/D3",
+      "locations": [
+        {
+          "section": "Format Ablation",
+          "lines": "550-584",
+          "label": "tab:prompt_ablation"
+        }
+      ],
+      "value_type": "float",
+      "decimals": 2
+    },
+    {
+      "id": "accuracy.public_original.D4",
+      "computed_path": "accuracy/public_original/D4",
+      "locations": [
+        {
+          "section": "Format Ablation",
+          "lines": "550-584",
+          "label": "tab:prompt_ablation"
+        }
+      ],
+      "value_type": "float",
+      "decimals": 2
+    },
+    {
+      "id": "accuracy.public_original.Overall",
+      "computed_path": "accuracy/public_original/Overall",
+      "locations": [
+        {
+          "section": "Format Ablation",
+          "lines": "550-584",
+          "label": "tab:prompt_ablation"
+        }
+      ],
+      "value_type": "float",
+      "decimals": 2
+    },
+    {
+      "id": "accuracy.repro_original.D0",
+      "computed_path": "accuracy/repro_original/D0",
+      "locations": [
+        {
+          "section": "Format Ablation",
+          "lines": "550-584",
+          "label": "tab:prompt_ablation"
+        },
+        {
+          "section": "Effect of Child-Subtree SFT",
+          "lines": "429-539",
+          "label": "fig:depthwise_top1"
+        }
+      ],
+      "value_type": "float",
+      "decimals": 2
+    },
+    {
+      "id": "accuracy.repro_original.D1",
+      "computed_path": "accuracy/repro_original/D1",
+      "locations": [
+        {
+          "section": "Format Ablation",
+          "lines": "550-584",
+          "label": "tab:prompt_ablation"
+        },
+        {
+          "section": "Effect of Child-Subtree SFT",
+          "lines": "429-539",
+          "label": "fig:depthwise_top1"
+        }
+      ],
+      "value_type": "float",
+      "decimals": 2
+    },
+    {
+      "id": "accuracy.repro_original.D2",
+      "computed_path": "accuracy/repro_original/D2",
+      "locations": [
+        {
+          "section": "Format Ablation",
+          "lines": "550-584",
+          "label": "tab:prompt_ablation"
+        },
+        {
+          "section": "Effect of Child-Subtree SFT",
+          "lines": "429-539",
+          "label": "fig:depthwise_top1"
+        }
+      ],
+      "value_type": "float",
+      "decimals": 2
+    },
+    {
+      "id": "accuracy.repro_original.D3",
+      "computed_path": "accuracy/repro_original/D3",
+      "locations": [
+        {
+          "section": "Format Ablation",
+          "lines": "550-584",
+          "label": "tab:prompt_ablation"
+        },
+        {
+          "section": "Effect of Child-Subtree SFT",
+          "lines": "429-539",
+          "label": "fig:depthwise_top1"
+        }
+      ],
+      "value_type": "float",
+      "decimals": 2
+    },
+    {
+      "id": "accuracy.repro_original.D4",
+      "computed_path": "accuracy/repro_original/D4",
+      "locations": [
+        {
+          "section": "Format Ablation",
+          "lines": "550-584",
+          "label": "tab:prompt_ablation"
+        },
+        {
+          "section": "Effect of Child-Subtree SFT",
+          "lines": "429-539",
+          "label": "fig:depthwise_top1"
+        }
+      ],
+      "value_type": "float",
+      "decimals": 2
+    },
+    {
+      "id": "accuracy.repro_original.Overall",
+      "computed_path": "accuracy/repro_original/Overall",
+      "locations": [
+        {
+          "section": "Format Ablation",
+          "lines": "550-584",
+          "label": "tab:prompt_ablation"
+        },
+        {
+          "section": "Effect of Child-Subtree SFT",
+          "lines": "429-539",
+          "label": "fig:depthwise_top1"
+        }
+      ],
+      "value_type": "float",
+      "decimals": 2
+    },
+    {
+      "id": "accuracy.repro_child.D0",
+      "computed_path": "accuracy/repro_child/D0",
+      "locations": [
+        {
+          "section": "Format Ablation",
+          "lines": "550-584",
+          "label": "tab:prompt_ablation"
+        }
+      ],
+      "value_type": "float",
+      "decimals": 2
+    },
+    {
+      "id": "accuracy.repro_child.D1",
+      "computed_path": "accuracy/repro_child/D1",
+      "locations": [
+        {
+          "section": "Format Ablation",
+          "lines": "550-584",
+          "label": "tab:prompt_ablation"
+        }
+      ],
+      "value_type": "float",
+      "decimals": 2
+    },
+    {
+      "id": "accuracy.repro_child.D2",
+      "computed_path": "accuracy/repro_child/D2",
+      "locations": [
+        {
+          "section": "Format Ablation",
+          "lines": "550-584",
+          "label": "tab:prompt_ablation"
+        }
+      ],
+      "value_type": "float",
+      "decimals": 2
+    },
+    {
+      "id": "accuracy.repro_child.D3",
+      "computed_path": "accuracy/repro_child/D3",
+      "locations": [
+        {
+          "section": "Format Ablation",
+          "lines": "550-584",
+          "label": "tab:prompt_ablation"
+        }
+      ],
+      "value_type": "float",
+      "decimals": 2
+    },
+    {
+      "id": "accuracy.repro_child.D4",
+      "computed_path": "accuracy/repro_child/D4",
+      "locations": [
+        {
+          "section": "Format Ablation",
+          "lines": "550-584",
+          "label": "tab:prompt_ablation"
+        }
+      ],
+      "value_type": "float",
+      "decimals": 2
+    },
+    {
+      "id": "accuracy.repro_child.Overall",
+      "computed_path": "accuracy/repro_child/Overall",
+      "locations": [
+        {
+          "section": "Format Ablation",
+          "lines": "550-584",
+          "label": "tab:prompt_ablation"
+        }
+      ],
+      "value_type": "float",
+      "decimals": 2
+    },
+    {
+      "id": "accuracy.child_child.D0",
+      "computed_path": "accuracy/child_child/D0",
+      "locations": [
+        {
+          "section": "Format Ablation",
+          "lines": "550-584",
+          "label": "tab:prompt_ablation"
+        },
+        {
+          "section": "Effect of Child-Subtree SFT",
+          "lines": "429-539",
+          "label": "fig:depthwise_top1"
+        }
+      ],
+      "value_type": "float",
+      "decimals": 2
+    },
+    {
+      "id": "accuracy.child_child.D1",
+      "computed_path": "accuracy/child_child/D1",
+      "locations": [
+        {
+          "section": "Format Ablation",
+          "lines": "550-584",
+          "label": "tab:prompt_ablation"
+        },
+        {
+          "section": "Effect of Child-Subtree SFT",
+          "lines": "429-539",
+          "label": "fig:depthwise_top1"
+        }
+      ],
+      "value_type": "float",
+      "decimals": 2
+    },
+    {
+      "id": "accuracy.child_child.D2",
+      "computed_path": "accuracy/child_child/D2",
+      "locations": [
+        {
+          "section": "Format Ablation",
+          "lines": "550-584",
+          "label": "tab:prompt_ablation"
+        },
+        {
+          "section": "Effect of Child-Subtree SFT",
+          "lines": "429-539",
+          "label": "fig:depthwise_top1"
+        }
+      ],
+      "value_type": "float",
+      "decimals": 2
+    },
+    {
+      "id": "accuracy.child_child.D3",
+      "computed_path": "accuracy/child_child/D3",
+      "locations": [
+        {
+          "section": "Format Ablation",
+          "lines": "550-584",
+          "label": "tab:prompt_ablation"
+        },
+        {
+          "section": "Effect of Child-Subtree SFT",
+          "lines": "429-539",
+          "label": "fig:depthwise_top1"
+        }
+      ],
+      "value_type": "float",
+      "decimals": 2
+    },
+    {
+      "id": "accuracy.child_child.D4",
+      "computed_path": "accuracy/child_child/D4",
+      "locations": [
+        {
+          "section": "Format Ablation",
+          "lines": "550-584",
+          "label": "tab:prompt_ablation"
+        },
+        {
+          "section": "Effect of Child-Subtree SFT",
+          "lines": "429-539",
+          "label": "fig:depthwise_top1"
+        }
+      ],
+      "value_type": "float",
+      "decimals": 2
+    },
+    {
+      "id": "accuracy.child_child.Overall",
+      "computed_path": "accuracy/child_child/Overall",
+      "locations": [
+        {
+          "section": "Format Ablation",
+          "lines": "550-584",
+          "label": "tab:prompt_ablation"
+        },
+        {
+          "section": "Effect of Child-Subtree SFT",
+          "lines": "429-539",
+          "label": "fig:depthwise_top1"
+        }
+      ],
+      "value_type": "float",
+      "decimals": 2
+    },
+    {
+      "id": "accuracy.child_original.D0",
+      "computed_path": "accuracy/child_original/D0",
+      "locations": [
+        {
+          "section": "Format Ablation",
+          "lines": "550-584",
+          "label": "tab:prompt_ablation"
+        }
+      ],
+      "value_type": "float",
+      "decimals": 2
+    },
+    {
+      "id": "accuracy.child_original.D1",
+      "computed_path": "accuracy/child_original/D1",
+      "locations": [
+        {
+          "section": "Format Ablation",
+          "lines": "550-584",
+          "label": "tab:prompt_ablation"
+        }
+      ],
+      "value_type": "float",
+      "decimals": 2
+    },
+    {
+      "id": "accuracy.child_original.D2",
+      "computed_path": "accuracy/child_original/D2",
+      "locations": [
+        {
+          "section": "Format Ablation",
+          "lines": "550-584",
+          "label": "tab:prompt_ablation"
+        }
+      ],
+      "value_type": "float",
+      "decimals": 2
+    },
+    {
+      "id": "accuracy.child_original.D3",
+      "computed_path": "accuracy/child_original/D3",
+      "locations": [
+        {
+          "section": "Format Ablation",
+          "lines": "550-584",
+          "label": "tab:prompt_ablation"
+        }
+      ],
+      "value_type": "float",
+      "decimals": 2
+    },
+    {
+      "id": "accuracy.child_original.D4",
+      "computed_path": "accuracy/child_original/D4",
+      "locations": [
+        {
+          "section": "Format Ablation",
+          "lines": "550-584",
+          "label": "tab:prompt_ablation"
+        }
+      ],
+      "value_type": "float",
+      "decimals": 2
+    },
+    {
+      "id": "accuracy.child_original.Overall",
+      "computed_path": "accuracy/child_original/Overall",
+      "locations": [
+        {
+          "section": "Format Ablation",
+          "lines": "550-584",
+          "label": "tab:prompt_ablation"
+        }
+      ],
+      "value_type": "float",
+      "decimals": 2
+    },
+    {
+      "id": "accuracy.repro_original.macro",
+      "computed_path": "accuracy/repro_original/Macro_D0_D3",
+      "locations": [
+        {
+          "section": "Abstract",
+          "lines": "80-81"
+        },
+        {
+          "section": "Contributions",
+          "lines": "155"
+        },
+        {
+          "section": "Effect of Child-Subtree SFT",
+          "lines": "526-539"
+        },
+        {
+          "section": "Conclusion",
+          "lines": "615-617"
+        }
+      ],
+      "value_type": "float",
+      "decimals": 2
+    },
+    {
+      "id": "accuracy.child_child.macro",
+      "computed_path": "accuracy/child_child/Macro_D0_D3",
+      "locations": [
+        {
+          "section": "Abstract",
+          "lines": "80-81"
+        },
+        {
+          "section": "Contributions",
+          "lines": "155"
+        },
+        {
+          "section": "Effect of Child-Subtree SFT",
+          "lines": "526-539"
+        },
+        {
+          "section": "Conclusion",
+          "lines": "615-617"
+        }
+      ],
+      "value_type": "float",
+      "decimals": 2
+    },
+    {
+      "id": "data.train_rows",
+      "computed_path": "corpus/counts/train_rows",
+      "locations": [
+        {
+          "section": "Source Data and Ground-Truth Path Extraction",
+          "lines": "193-210"
+        },
+        {
+          "section": "Implementation and Data",
+          "lines": "291-318"
+        }
+      ],
+      "value_type": "int",
+      "decimals": 0
+    },
+    {
+      "id": "data.test_rows",
+      "computed_path": "corpus/counts/test_rows",
+      "locations": [
+        {
+          "section": "Source Data and Ground-Truth Path Extraction",
+          "lines": "193-210"
+        },
+        {
+          "section": "Implementation and Data",
+          "lines": "291-318"
+        }
+      ],
+      "value_type": "int",
+      "decimals": 0
+    },
+    {
+      "id": "data.test_inspiration_seen",
+      "computed_path": "corpus/counts/test_inspiration_seen",
+      "locations": [
+        {
+          "section": "Source Data and Ground-Truth Path Extraction",
+          "lines": "193-210"
+        },
+        {
+          "section": "Implementation and Data",
+          "lines": "291-318"
+        }
+      ],
+      "value_type": "int",
+      "decimals": 0
+    },
+    {
+      "id": "data.within_source_deduplicated_titles",
+      "computed_path": "corpus/counts/within_source_deduplicated_titles",
+      "locations": [
+        {
+          "section": "Source Data and Ground-Truth Path Extraction",
+          "lines": "193-210"
+        },
+        {
+          "section": "Implementation and Data",
+          "lines": "291-318"
+        }
+      ],
+      "value_type": "int",
+      "decimals": 0
+    },
+    {
+      "id": "data.sources_with_mapped_target",
+      "computed_path": "corpus/counts/sources_with_mapped_target",
+      "locations": [
+        {
+          "section": "Source Data and Ground-Truth Path Extraction",
+          "lines": "193-210"
+        },
+        {
+          "section": "Implementation and Data",
+          "lines": "291-318"
+        }
+      ],
+      "value_type": "int",
+      "decimals": 0
+    },
+    {
+      "id": "data.num_unique_papers",
+      "computed_path": "corpus/counts/num_unique_papers",
+      "locations": [
+        {
+          "section": "Source Data and Ground-Truth Path Extraction",
+          "lines": "193-210"
+        },
+        {
+          "section": "Implementation and Data",
+          "lines": "291-318"
+        }
+      ],
+      "value_type": "int",
+      "decimals": 0
+    },
+    {
+      "id": "data.distinct_matched_leaf_papers",
+      "computed_path": "corpus/counts/distinct_matched_leaf_papers",
+      "locations": [
+        {
+          "section": "Source Data and Ground-Truth Path Extraction",
+          "lines": "193-210"
+        },
+        {
+          "section": "Implementation and Data",
+          "lines": "291-318"
+        }
+      ],
+      "value_type": "int",
+      "decimals": 0
+    },
+    {
+      "id": "data.incremental_test_papers",
+      "computed_path": "corpus/counts/test_inspiration_added",
+      "locations": [
+        {
+          "section": "Implementation and Data",
+          "lines": "318"
+        }
+      ],
+      "value_type": "int",
+      "decimals": 0
+    },
+    {
+      "id": "training.paper_selection_examples",
+      "computed_path": "training/paper_selection_examples",
+      "locations": [
+        {
+          "section": "Training Data",
+          "lines": "252-258"
+        },
+        {
+          "section": "Implementation",
+          "lines": "291-298",
+          "label": "tab:implementation"
+        },
+        {
+          "section": "Discussion",
+          "lines": "606"
+        }
+      ],
+      "value_type": "int",
+      "decimals": 0
+    },
+    {
+      "id": "training.child_subtree_examples",
+      "computed_path": "training/child_subtree_examples",
+      "locations": [
+        {
+          "section": "Training Data",
+          "lines": "252-258"
+        },
+        {
+          "section": "Implementation",
+          "lines": "291-298",
+          "label": "tab:implementation"
+        },
+        {
+          "section": "Discussion",
+          "lines": "606"
+        }
+      ],
+      "value_type": "int",
+      "decimals": 0
+    },
+    {
+      "id": "training.paper_selection_unique_sources",
+      "computed_path": "training/paper_selection_unique_sources",
+      "locations": [
+        {
+          "section": "Training Data",
+          "lines": "252-258"
+        },
+        {
+          "section": "Implementation",
+          "lines": "291-298",
+          "label": "tab:implementation"
+        },
+        {
+          "section": "Discussion",
+          "lines": "606"
+        }
+      ],
+      "value_type": "int",
+      "decimals": 0
+    },
+    {
+      "id": "training.child_subtree_unique_sources",
+      "computed_path": "training/child_subtree_unique_sources",
+      "locations": [
+        {
+          "section": "Training Data",
+          "lines": "252-258"
+        },
+        {
+          "section": "Implementation",
+          "lines": "291-298",
+          "label": "tab:implementation"
+        },
+        {
+          "section": "Discussion",
+          "lines": "606"
+        }
+      ],
+      "value_type": "int",
+      "decimals": 0
+    },
+    {
+      "id": "training.shared_sources",
+      "computed_path": "training/shared_sources",
+      "locations": [
+        {
+          "section": "Training Data",
+          "lines": "252-258"
+        },
+        {
+          "section": "Implementation",
+          "lines": "291-298",
+          "label": "tab:implementation"
+        },
+        {
+          "section": "Discussion",
+          "lines": "606"
+        }
+      ],
+      "value_type": "int",
+      "decimals": 0
+    },
+    {
+      "id": "training.shared_percent",
+      "computed_path": "training/shared_percent",
+      "locations": [
+        {
+          "section": "Training Data",
+          "lines": "258"
+        }
+      ],
+      "value_type": "float",
+      "decimals": 1
+    },
+    {
+      "id": "parent_count.D0",
+      "computed_path": "corpus/parent_counts/0",
+      "locations": [
+        {
+          "section": "Evaluation Metrics",
+          "lines": "336"
+        }
+      ],
+      "value_type": "int",
+      "decimals": 0
+    },
+    {
+      "id": "parent_count.D1",
+      "computed_path": "corpus/parent_counts/1",
+      "locations": [
+        {
+          "section": "Evaluation Metrics",
+          "lines": "336"
+        }
+      ],
+      "value_type": "int",
+      "decimals": 0
+    },
+    {
+      "id": "parent_count.D2",
+      "computed_path": "corpus/parent_counts/2",
+      "locations": [
+        {
+          "section": "Evaluation Metrics",
+          "lines": "336"
+        }
+      ],
+      "value_type": "int",
+      "decimals": 0
+    },
+    {
+      "id": "parent_count.D3",
+      "computed_path": "corpus/parent_counts/3",
+      "locations": [
+        {
+          "section": "Evaluation Metrics",
+          "lines": "336"
+        }
+      ],
+      "value_type": "int",
+      "decimals": 0
+    },
+    {
+      "id": "parent_count.D4",
+      "computed_path": "corpus/parent_counts/4",
+      "locations": [
+        {
+          "section": "Evaluation Metrics",
+          "lines": "336"
+        }
+      ],
+      "value_type": "int",
+      "decimals": 0
+    },
+    {
+      "id": "tree.D0.parents",
+      "computed_path": "tree/depths/0/parents",
+      "locations": [
+        {
+          "section": "Candidate Granularity",
+          "lines": "369",
+          "label": "tab:tree_granularity"
+        }
+      ],
+      "value_type": "int",
+      "decimals": 0
+    },
+    {
+      "id": "tree.D0.mean_children",
+      "computed_path": "tree/depths/0/mean_children",
+      "locations": [
+        {
+          "section": "Candidate Granularity",
+          "lines": "369",
+          "label": "tab:tree_granularity"
+        }
+      ],
+      "value_type": "int",
+      "decimals": 2
+    },
+    {
+      "id": "tree.D0.mean_papers_per_candidate",
+      "computed_path": "tree/depths/0/mean_papers_per_candidate",
+      "locations": [
+        {
+          "section": "Candidate Granularity",
+          "lines": "369",
+          "label": "tab:tree_granularity"
+        }
+      ],
+      "value_type": "float",
+      "decimals": 2
+    },
+    {
+      "id": "tree.D0.median_papers_per_candidate",
+      "computed_path": "tree/depths/0/median_papers_per_candidate",
+      "locations": [
+        {
+          "section": "Candidate Granularity",
+          "lines": "369",
+          "label": "tab:tree_granularity"
+        }
+      ],
+      "value_type": "int",
+      "decimals": 2
+    },
+    {
+      "id": "tree.D1.parents",
+      "computed_path": "tree/depths/1/parents",
+      "locations": [
+        {
+          "section": "Candidate Granularity",
+          "lines": "369",
+          "label": "tab:tree_granularity"
+        }
+      ],
+      "value_type": "int",
+      "decimals": 0
+    },
+    {
+      "id": "tree.D1.mean_children",
+      "computed_path": "tree/depths/1/mean_children",
+      "locations": [
+        {
+          "section": "Candidate Granularity",
+          "lines": "369",
+          "label": "tab:tree_granularity"
+        }
+      ],
+      "value_type": "float",
+      "decimals": 2
+    },
+    {
+      "id": "tree.D1.mean_papers_per_candidate",
+      "computed_path": "tree/depths/1/mean_papers_per_candidate",
+      "locations": [
+        {
+          "section": "Candidate Granularity",
+          "lines": "369",
+          "label": "tab:tree_granularity"
+        }
+      ],
+      "value_type": "float",
+      "decimals": 2
+    },
+    {
+      "id": "tree.D1.median_papers_per_candidate",
+      "computed_path": "tree/depths/1/median_papers_per_candidate",
+      "locations": [
+        {
+          "section": "Candidate Granularity",
+          "lines": "369",
+          "label": "tab:tree_granularity"
+        }
+      ],
+      "value_type": "int",
+      "decimals": 2
+    },
+    {
+      "id": "tree.D2.parents",
+      "computed_path": "tree/depths/2/parents",
+      "locations": [
+        {
+          "section": "Candidate Granularity",
+          "lines": "369",
+          "label": "tab:tree_granularity"
+        }
+      ],
+      "value_type": "int",
+      "decimals": 0
+    },
+    {
+      "id": "tree.D2.mean_children",
+      "computed_path": "tree/depths/2/mean_children",
+      "locations": [
+        {
+          "section": "Candidate Granularity",
+          "lines": "369",
+          "label": "tab:tree_granularity"
+        }
+      ],
+      "value_type": "float",
+      "decimals": 2
+    },
+    {
+      "id": "tree.D2.mean_papers_per_candidate",
+      "computed_path": "tree/depths/2/mean_papers_per_candidate",
+      "locations": [
+        {
+          "section": "Candidate Granularity",
+          "lines": "369",
+          "label": "tab:tree_granularity"
+        }
+      ],
+      "value_type": "float",
+      "decimals": 2
+    },
+    {
+      "id": "tree.D2.median_papers_per_candidate",
+      "computed_path": "tree/depths/2/median_papers_per_candidate",
+      "locations": [
+        {
+          "section": "Candidate Granularity",
+          "lines": "369",
+          "label": "tab:tree_granularity"
+        }
+      ],
+      "value_type": "int",
+      "decimals": 2
+    },
+    {
+      "id": "tree.D3.parents",
+      "computed_path": "tree/depths/3/parents",
+      "locations": [
+        {
+          "section": "Candidate Granularity",
+          "lines": "369",
+          "label": "tab:tree_granularity"
+        }
+      ],
+      "value_type": "int",
+      "decimals": 0
+    },
+    {
+      "id": "tree.D3.mean_children",
+      "computed_path": "tree/depths/3/mean_children",
+      "locations": [
+        {
+          "section": "Candidate Granularity",
+          "lines": "369",
+          "label": "tab:tree_granularity"
+        }
+      ],
+      "value_type": "float",
+      "decimals": 2
+    },
+    {
+      "id": "tree.D3.mean_papers_per_candidate",
+      "computed_path": "tree/depths/3/mean_papers_per_candidate",
+      "locations": [
+        {
+          "section": "Candidate Granularity",
+          "lines": "369",
+          "label": "tab:tree_granularity"
+        }
+      ],
+      "value_type": "int",
+      "decimals": 2
+    },
+    {
+      "id": "tree.D3.median_papers_per_candidate",
+      "computed_path": "tree/depths/3/median_papers_per_candidate",
+      "locations": [
+        {
+          "section": "Candidate Granularity",
+          "lines": "369",
+          "label": "tab:tree_granularity"
+        }
+      ],
+      "value_type": "int",
+      "decimals": 2
+    },
+    {
+      "id": "tree.D4.parents",
+      "computed_path": "tree/depths/4/parents",
+      "locations": [
+        {
+          "section": "Candidate Granularity",
+          "lines": "369",
+          "label": "tab:tree_granularity"
+        }
+      ],
+      "value_type": "int",
+      "decimals": 0
+    },
+    {
+      "id": "tree.D4.mean_children",
+      "computed_path": "tree/depths/4/mean_children",
+      "locations": [
+        {
+          "section": "Candidate Granularity",
+          "lines": "369",
+          "label": "tab:tree_granularity"
+        }
+      ],
+      "value_type": "int",
+      "decimals": 2
+    },
+    {
+      "id": "tree.D4.mean_papers_per_candidate",
+      "computed_path": "tree/depths/4/mean_papers_per_candidate",
+      "locations": [
+        {
+          "section": "Candidate Granularity",
+          "lines": "369",
+          "label": "tab:tree_granularity"
+        }
+      ],
+      "value_type": "int",
+      "decimals": 2
+    },
+    {
+      "id": "tree.D4.median_papers_per_candidate",
+      "computed_path": "tree/depths/4/median_papers_per_candidate",
+      "locations": [
+        {
+          "section": "Candidate Granularity",
+          "lines": "369",
+          "label": "tab:tree_granularity"
+        }
+      ],
+      "value_type": "int",
+      "decimals": 2
+    },
+    {
+      "id": "public_topk.D0.Top1",
+      "computed_path": "topk_corrected/0/Top1",
+      "locations": [
+        {
+          "section": "Evaluation Metrics",
+          "lines": "329-336"
+        },
+        {
+          "section": "Public Model Results",
+          "lines": "399-416",
+          "label": "tab:sample_level"
+        }
+      ],
+      "value_type": "float",
+      "decimals": 2
+    },
+    {
+      "id": "public_topk.D0.Top2",
+      "computed_path": "topk_corrected/0/Top2",
+      "locations": [
+        {
+          "section": "Evaluation Metrics",
+          "lines": "329-336"
+        },
+        {
+          "section": "Public Model Results",
+          "lines": "399-416",
+          "label": "tab:sample_level"
+        }
+      ],
+      "value_type": "float",
+      "decimals": 2
+    },
+    {
+      "id": "public_topk.D0.Top3",
+      "computed_path": "topk_corrected/0/Top3",
+      "locations": [
+        {
+          "section": "Evaluation Metrics",
+          "lines": "329-336"
+        },
+        {
+          "section": "Public Model Results",
+          "lines": "399-416",
+          "label": "tab:sample_level"
+        }
+      ],
+      "value_type": "float",
+      "decimals": 2
+    },
+    {
+      "id": "public_topk.D0.Top5",
+      "computed_path": "topk_corrected/0/Top5",
+      "locations": [
+        {
+          "section": "Evaluation Metrics",
+          "lines": "329-336"
+        },
+        {
+          "section": "Public Model Results",
+          "lines": "399-416",
+          "label": "tab:sample_level"
+        }
+      ],
+      "value_type": "int",
+      "decimals": 2
+    },
+    {
+      "id": "public_topk.D0.Mean",
+      "computed_path": "topk_corrected/0/Mean",
+      "locations": [
+        {
+          "section": "Evaluation Metrics",
+          "lines": "329-336"
+        },
+        {
+          "section": "Public Model Results",
+          "lines": "399-416",
+          "label": "tab:sample_level"
+        }
+      ],
+      "value_type": "float",
+      "decimals": 2
+    },
+    {
+      "id": "public_topk.D0.Median",
+      "computed_path": "topk_corrected/0/Median",
+      "locations": [
+        {
+          "section": "Evaluation Metrics",
+          "lines": "329-336"
+        },
+        {
+          "section": "Public Model Results",
+          "lines": "399-416",
+          "label": "tab:sample_level"
+        }
+      ],
+      "value_type": "int",
+      "decimals": 2
+    },
+    {
+      "id": "public_topk.D1.Top1",
+      "computed_path": "topk_corrected/1/Top1",
+      "locations": [
+        {
+          "section": "Evaluation Metrics",
+          "lines": "329-336"
+        },
+        {
+          "section": "Public Model Results",
+          "lines": "399-416",
+          "label": "tab:sample_level"
+        }
+      ],
+      "value_type": "float",
+      "decimals": 2
+    },
+    {
+      "id": "public_topk.D1.Top2",
+      "computed_path": "topk_corrected/1/Top2",
+      "locations": [
+        {
+          "section": "Evaluation Metrics",
+          "lines": "329-336"
+        },
+        {
+          "section": "Public Model Results",
+          "lines": "399-416",
+          "label": "tab:sample_level"
+        }
+      ],
+      "value_type": "float",
+      "decimals": 2
+    },
+    {
+      "id": "public_topk.D1.Top3",
+      "computed_path": "topk_corrected/1/Top3",
+      "locations": [
+        {
+          "section": "Evaluation Metrics",
+          "lines": "329-336"
+        },
+        {
+          "section": "Public Model Results",
+          "lines": "399-416",
+          "label": "tab:sample_level"
+        }
+      ],
+      "value_type": "float",
+      "decimals": 2
+    },
+    {
+      "id": "public_topk.D1.Top5",
+      "computed_path": "topk_corrected/1/Top5",
+      "locations": [
+        {
+          "section": "Evaluation Metrics",
+          "lines": "329-336"
+        },
+        {
+          "section": "Public Model Results",
+          "lines": "399-416",
+          "label": "tab:sample_level"
+        }
+      ],
+      "value_type": "float",
+      "decimals": 2
+    },
+    {
+      "id": "public_topk.D1.Mean",
+      "computed_path": "topk_corrected/1/Mean",
+      "locations": [
+        {
+          "section": "Evaluation Metrics",
+          "lines": "329-336"
+        },
+        {
+          "section": "Public Model Results",
+          "lines": "399-416",
+          "label": "tab:sample_level"
+        }
+      ],
+      "value_type": "float",
+      "decimals": 2
+    },
+    {
+      "id": "public_topk.D1.Median",
+      "computed_path": "topk_corrected/1/Median",
+      "locations": [
+        {
+          "section": "Evaluation Metrics",
+          "lines": "329-336"
+        },
+        {
+          "section": "Public Model Results",
+          "lines": "399-416",
+          "label": "tab:sample_level"
+        }
+      ],
+      "value_type": "int",
+      "decimals": 2
+    },
+    {
+      "id": "public_topk.D2.Top1",
+      "computed_path": "topk_corrected/2/Top1",
+      "locations": [
+        {
+          "section": "Evaluation Metrics",
+          "lines": "329-336"
+        },
+        {
+          "section": "Public Model Results",
+          "lines": "399-416",
+          "label": "tab:sample_level"
+        }
+      ],
+      "value_type": "float",
+      "decimals": 2
+    },
+    {
+      "id": "public_topk.D2.Top2",
+      "computed_path": "topk_corrected/2/Top2",
+      "locations": [
+        {
+          "section": "Evaluation Metrics",
+          "lines": "329-336"
+        },
+        {
+          "section": "Public Model Results",
+          "lines": "399-416",
+          "label": "tab:sample_level"
+        }
+      ],
+      "value_type": "float",
+      "decimals": 2
+    },
+    {
+      "id": "public_topk.D2.Top3",
+      "computed_path": "topk_corrected/2/Top3",
+      "locations": [
+        {
+          "section": "Evaluation Metrics",
+          "lines": "329-336"
+        },
+        {
+          "section": "Public Model Results",
+          "lines": "399-416",
+          "label": "tab:sample_level"
+        }
+      ],
+      "value_type": "float",
+      "decimals": 2
+    },
+    {
+      "id": "public_topk.D2.Top5",
+      "computed_path": "topk_corrected/2/Top5",
+      "locations": [
+        {
+          "section": "Evaluation Metrics",
+          "lines": "329-336"
+        },
+        {
+          "section": "Public Model Results",
+          "lines": "399-416",
+          "label": "tab:sample_level"
+        }
+      ],
+      "value_type": "float",
+      "decimals": 2
+    },
+    {
+      "id": "public_topk.D2.Mean",
+      "computed_path": "topk_corrected/2/Mean",
+      "locations": [
+        {
+          "section": "Evaluation Metrics",
+          "lines": "329-336"
+        },
+        {
+          "section": "Public Model Results",
+          "lines": "399-416",
+          "label": "tab:sample_level"
+        }
+      ],
+      "value_type": "int",
+      "decimals": 2
+    },
+    {
+      "id": "public_topk.D2.Median",
+      "computed_path": "topk_corrected/2/Median",
+      "locations": [
+        {
+          "section": "Evaluation Metrics",
+          "lines": "329-336"
+        },
+        {
+          "section": "Public Model Results",
+          "lines": "399-416",
+          "label": "tab:sample_level"
+        }
+      ],
+      "value_type": "int",
+      "decimals": 2
+    },
+    {
+      "id": "public_topk.D3.Top1",
+      "computed_path": "topk_corrected/3/Top1",
+      "locations": [
+        {
+          "section": "Evaluation Metrics",
+          "lines": "329-336"
+        },
+        {
+          "section": "Public Model Results",
+          "lines": "399-416",
+          "label": "tab:sample_level"
+        }
+      ],
+      "value_type": "float",
+      "decimals": 2
+    },
+    {
+      "id": "public_topk.D3.Top2",
+      "computed_path": "topk_corrected/3/Top2",
+      "locations": [
+        {
+          "section": "Evaluation Metrics",
+          "lines": "329-336"
+        },
+        {
+          "section": "Public Model Results",
+          "lines": "399-416",
+          "label": "tab:sample_level"
+        }
+      ],
+      "value_type": "int",
+      "decimals": 2
+    },
+    {
+      "id": "public_topk.D3.Top3",
+      "computed_path": "topk_corrected/3/Top3",
+      "locations": [
+        {
+          "section": "Evaluation Metrics",
+          "lines": "329-336"
+        },
+        {
+          "section": "Public Model Results",
+          "lines": "399-416",
+          "label": "tab:sample_level"
+        }
+      ],
+      "value_type": "float",
+      "decimals": 2
+    },
+    {
+      "id": "public_topk.D3.Top5",
+      "computed_path": "topk_corrected/3/Top5",
+      "locations": [
+        {
+          "section": "Evaluation Metrics",
+          "lines": "329-336"
+        },
+        {
+          "section": "Public Model Results",
+          "lines": "399-416",
+          "label": "tab:sample_level"
+        }
+      ],
+      "value_type": "float",
+      "decimals": 2
+    },
+    {
+      "id": "public_topk.D3.Mean",
+      "computed_path": "topk_corrected/3/Mean",
+      "locations": [
+        {
+          "section": "Evaluation Metrics",
+          "lines": "329-336"
+        },
+        {
+          "section": "Public Model Results",
+          "lines": "399-416",
+          "label": "tab:sample_level"
+        }
+      ],
+      "value_type": "float",
+      "decimals": 2
+    },
+    {
+      "id": "public_topk.D3.Median",
+      "computed_path": "topk_corrected/3/Median",
+      "locations": [
+        {
+          "section": "Evaluation Metrics",
+          "lines": "329-336"
+        },
+        {
+          "section": "Public Model Results",
+          "lines": "399-416",
+          "label": "tab:sample_level"
+        }
+      ],
+      "value_type": "float",
+      "decimals": 2
+    },
+    {
+      "id": "public_topk.D4.Top1",
+      "computed_path": "topk_corrected/4/Top1",
+      "locations": [
+        {
+          "section": "Evaluation Metrics",
+          "lines": "329-336"
+        },
+        {
+          "section": "Public Model Results",
+          "lines": "399-416",
+          "label": "tab:sample_level"
+        }
+      ],
+      "value_type": "float",
+      "decimals": 2
+    },
+    {
+      "id": "public_topk.D4.Top2",
+      "computed_path": "topk_corrected/4/Top2",
+      "locations": [
+        {
+          "section": "Evaluation Metrics",
+          "lines": "329-336"
+        },
+        {
+          "section": "Public Model Results",
+          "lines": "399-416",
+          "label": "tab:sample_level"
+        }
+      ],
+      "value_type": "float",
+      "decimals": 2
+    },
+    {
+      "id": "public_topk.D4.Top3",
+      "computed_path": "topk_corrected/4/Top3",
+      "locations": [
+        {
+          "section": "Evaluation Metrics",
+          "lines": "329-336"
+        },
+        {
+          "section": "Public Model Results",
+          "lines": "399-416",
+          "label": "tab:sample_level"
+        }
+      ],
+      "value_type": "float",
+      "decimals": 2
+    },
+    {
+      "id": "public_topk.D4.Top5",
+      "computed_path": "topk_corrected/4/Top5",
+      "locations": [
+        {
+          "section": "Evaluation Metrics",
+          "lines": "329-336"
+        },
+        {
+          "section": "Public Model Results",
+          "lines": "399-416",
+          "label": "tab:sample_level"
+        }
+      ],
+      "value_type": "float",
+      "decimals": 2
+    },
+    {
+      "id": "public_topk.D4.Mean",
+      "computed_path": "topk_corrected/4/Mean",
+      "locations": [
+        {
+          "section": "Evaluation Metrics",
+          "lines": "329-336"
+        },
+        {
+          "section": "Public Model Results",
+          "lines": "399-416",
+          "label": "tab:sample_level"
+        }
+      ],
+      "value_type": "float",
+      "decimals": 2
+    },
+    {
+      "id": "public_topk.D4.Median",
+      "computed_path": "topk_corrected/4/Median",
+      "locations": [
+        {
+          "section": "Evaluation Metrics",
+          "lines": "329-336"
+        },
+        {
+          "section": "Public Model Results",
+          "lines": "399-416",
+          "label": "tab:sample_level"
+        }
+      ],
+      "value_type": "int",
+      "decimals": 2
+    },
+    {
+      "id": "difference.D0",
+      "computed_path": "statistics/D0/difference_pp",
+      "locations": [
+        {
+          "section": "Effect of Child-Subtree SFT",
+          "lines": "526-536"
+        }
+      ],
+      "value_type": "float",
+      "decimals": 2
+    },
+    {
+      "id": "difference.D1",
+      "computed_path": "statistics/D1/difference_pp",
+      "locations": [
+        {
+          "section": "Effect of Child-Subtree SFT",
+          "lines": "526-536"
+        }
+      ],
+      "value_type": "float",
+      "decimals": 2
+    },
+    {
+      "id": "difference.D2",
+      "computed_path": "statistics/D2/difference_pp",
+      "locations": [
+        {
+          "section": "Effect of Child-Subtree SFT",
+          "lines": "526-536"
+        }
+      ],
+      "value_type": "float",
+      "decimals": 2
+    },
+    {
+      "id": "difference.D3",
+      "computed_path": "statistics/D3/difference_pp",
+      "locations": [
+        {
+          "section": "Effect of Child-Subtree SFT",
+          "lines": "526-536"
+        }
+      ],
+      "value_type": "float",
+      "decimals": 2
+    },
+    {
+      "id": "difference.D4",
+      "computed_path": "statistics/D4/difference_pp",
+      "locations": [
+        {
+          "section": "Effect of Child-Subtree SFT",
+          "lines": "526-536"
+        }
+      ],
+      "value_type": "float",
+      "decimals": 2
+    },
+    {
+      "id": "ci.D0.0",
+      "computed_path": "statistics/D0/ci95_pp/0",
+      "locations": [
+        {
+          "section": "Effect of Child-Subtree SFT",
+          "lines": "530-536"
+        }
+      ],
+      "value_type": "float",
+      "decimals": 2
+    },
+    {
+      "id": "ci.D0.1",
+      "computed_path": "statistics/D0/ci95_pp/1",
+      "locations": [
+        {
+          "section": "Effect of Child-Subtree SFT",
+          "lines": "530-536"
+        }
+      ],
+      "value_type": "float",
+      "decimals": 2
+    },
+    {
+      "id": "p.D0",
+      "computed_path": "statistics/D0/exact_mcnemar_p",
+      "locations": [
+        {
+          "section": "Effect of Child-Subtree SFT",
+          "lines": "531-536"
+        }
+      ],
+      "value_type": "float",
+      "decimals": null
+    },
+    {
+      "id": "ci.D1.0",
+      "computed_path": "statistics/D1/ci95_pp/0",
+      "locations": [
+        {
+          "section": "Effect of Child-Subtree SFT",
+          "lines": "530-536"
+        }
+      ],
+      "value_type": "float",
+      "decimals": 2
+    },
+    {
+      "id": "ci.D1.1",
+      "computed_path": "statistics/D1/ci95_pp/1",
+      "locations": [
+        {
+          "section": "Effect of Child-Subtree SFT",
+          "lines": "530-536"
+        }
+      ],
+      "value_type": "float",
+      "decimals": 2
+    },
+    {
+      "id": "p.D1",
+      "computed_path": "statistics/D1/exact_mcnemar_p",
+      "locations": [
+        {
+          "section": "Effect of Child-Subtree SFT",
+          "lines": "531-536"
+        }
+      ],
+      "value_type": "float",
+      "decimals": null
+    },
+    {
+      "id": "ci.D2.0",
+      "computed_path": "statistics/D2/ci95_pp/0",
+      "locations": [
+        {
+          "section": "Effect of Child-Subtree SFT",
+          "lines": "530-536"
+        }
+      ],
+      "value_type": "float",
+      "decimals": 2
+    },
+    {
+      "id": "ci.D2.1",
+      "computed_path": "statistics/D2/ci95_pp/1",
+      "locations": [
+        {
+          "section": "Effect of Child-Subtree SFT",
+          "lines": "530-536"
+        }
+      ],
+      "value_type": "float",
+      "decimals": 2
+    },
+    {
+      "id": "p.D2",
+      "computed_path": "statistics/D2/exact_mcnemar_p",
+      "locations": [
+        {
+          "section": "Effect of Child-Subtree SFT",
+          "lines": "531-536"
+        }
+      ],
+      "value_type": "float",
+      "decimals": null
+    },
+    {
+      "id": "ci.D3.0",
+      "computed_path": "statistics/D3/ci95_pp/0",
+      "locations": [
+        {
+          "section": "Effect of Child-Subtree SFT",
+          "lines": "530-536"
+        }
+      ],
+      "value_type": "float",
+      "decimals": 2
+    },
+    {
+      "id": "ci.D3.1",
+      "computed_path": "statistics/D3/ci95_pp/1",
+      "locations": [
+        {
+          "section": "Effect of Child-Subtree SFT",
+          "lines": "530-536"
+        }
+      ],
+      "value_type": "float",
+      "decimals": 2
+    },
+    {
+      "id": "p.D3",
+      "computed_path": "statistics/D3/exact_mcnemar_p",
+      "locations": [
+        {
+          "section": "Effect of Child-Subtree SFT",
+          "lines": "531-536"
+        }
+      ],
+      "value_type": "float",
+      "decimals": null
+    },
+    {
+      "id": "ci.D4.0",
+      "computed_path": "statistics/D4/ci95_pp/0",
+      "locations": [
+        {
+          "section": "Effect of Child-Subtree SFT",
+          "lines": "530-536"
+        }
+      ],
+      "value_type": "float",
+      "decimals": 2
+    },
+    {
+      "id": "ci.D4.1",
+      "computed_path": "statistics/D4/ci95_pp/1",
+      "locations": [
+        {
+          "section": "Effect of Child-Subtree SFT",
+          "lines": "530-536"
+        }
+      ],
+      "value_type": "float",
+      "decimals": 2
+    },
+    {
+      "id": "p.D4",
+      "computed_path": "statistics/D4/exact_mcnemar_p",
+      "locations": [
+        {
+          "section": "Effect of Child-Subtree SFT",
+          "lines": "531-536"
+        }
+      ],
+      "value_type": "float",
+      "decimals": null
+    },
+    {
+      "id": "difference.macro_D0_D3",
+      "computed_path": "statistics/macro_D0_D3/difference_pp",
+      "locations": [
+        {
+          "section": "Abstract",
+          "lines": "80-81"
+        },
+        {
+          "section": "Contributions",
+          "lines": "155"
+        },
+        {
+          "section": "Effect of Child-Subtree SFT",
+          "lines": "526-539"
+        },
+        {
+          "section": "Conclusion",
+          "lines": "615-617"
+        }
+      ],
+      "value_type": "float",
+      "decimals": 2
+    },
+    {
+      "id": "difference.macro_D0_D4",
+      "computed_path": "statistics/macro_D0_D4/difference_pp",
+      "locations": [
+        {
+          "section": "Abstract",
+          "lines": "80-81"
+        },
+        {
+          "section": "Contributions",
+          "lines": "155"
+        },
+        {
+          "section": "Effect of Child-Subtree SFT",
+          "lines": "526-539"
+        },
+        {
+          "section": "Conclusion",
+          "lines": "615-617"
+        }
+      ],
+      "value_type": "float",
+      "decimals": 2
+    },
+    {
+      "id": "setting.seed",
+      "computed_path": "settings/seed",
+      "locations": [
+        {
+          "section": "Implementation and Data",
+          "lines": "274-307",
+          "label": "tab:implementation"
+        }
+      ],
+      "value_type": "int",
+      "decimals": null
+    },
+    {
+      "id": "setting.num_train_epochs",
+      "computed_path": "settings/num_train_epochs",
+      "locations": [
+        {
+          "section": "Implementation and Data",
+          "lines": "274-307",
+          "label": "tab:implementation"
+        }
+      ],
+      "value_type": "int",
+      "decimals": null
+    },
+    {
+      "id": "setting.learning_rate",
+      "computed_path": "settings/learning_rate",
+      "locations": [
+        {
+          "section": "Implementation and Data",
+          "lines": "274-307",
+          "label": "tab:implementation"
+        }
+      ],
+      "value_type": "float",
+      "decimals": null
+    },
+    {
+      "id": "setting.warmup_ratio",
+      "computed_path": "settings/warmup_ratio",
+      "locations": [
+        {
+          "section": "Implementation and Data",
+          "lines": "274-307",
+          "label": "tab:implementation"
+        }
+      ],
+      "value_type": "float",
+      "decimals": null
+    },
+    {
+      "id": "setting.weight_decay",
+      "computed_path": "settings/weight_decay",
+      "locations": [
+        {
+          "section": "Implementation and Data",
+          "lines": "274-307",
+          "label": "tab:implementation"
+        }
+      ],
+      "value_type": "float",
+      "decimals": null
+    },
+    {
+      "id": "setting.per_device_train_batch_size",
+      "computed_path": "settings/per_device_train_batch_size",
+      "locations": [
+        {
+          "section": "Implementation and Data",
+          "lines": "274-307",
+          "label": "tab:implementation"
+        }
+      ],
+      "value_type": "int",
+      "decimals": null
+    },
+    {
+      "id": "setting.bf16",
+      "computed_path": "settings/bf16",
+      "locations": [
+        {
+          "section": "Implementation and Data",
+          "lines": "274-307",
+          "label": "tab:implementation"
+        }
+      ],
+      "value_type": "bool",
+      "decimals": null
+    },
+    {
+      "id": "setting.finetuning_type",
+      "computed_path": "settings/finetuning_type",
+      "locations": [
+        {
+          "section": "Implementation and Data",
+          "lines": "274-307",
+          "label": "tab:implementation"
+        }
+      ],
+      "value_type": "str",
+      "decimals": null
+    },
+    {
+      "id": "setting.lr_scheduler_type",
+      "computed_path": "settings/lr_scheduler_type",
+      "locations": [
+        {
+          "section": "Implementation and Data",
+          "lines": "274-307",
+          "label": "tab:implementation"
+        }
+      ],
+      "value_type": "str",
+      "decimals": null
+    },
+    {
+      "id": "setting.deepspeed",
+      "computed_path": "settings/deepspeed",
+      "locations": [
+        {
+          "section": "Implementation and Data",
+          "lines": "274-307",
+          "label": "tab:implementation"
+        }
+      ],
+      "value_type": "str",
+      "decimals": null
+    },
+    {
+      "id": "setting.backbone",
+      "computed_path": "settings/backbone",
+      "locations": [
+        {
+          "section": "Implementation and Data",
+          "lines": "274-307",
+          "label": "tab:implementation"
+        }
+      ],
+      "value_type": "str",
+      "decimals": null
+    },
+    {
+      "id": "setting.pub_training_records",
+      "computed_path": "settings/pub_training_records",
+      "locations": [
+        {
+          "section": "Implementation and Data",
+          "lines": "274-307",
+          "label": "tab:implementation"
+        }
+      ],
+      "value_type": "int",
+      "decimals": null
+    },
+    {
+      "id": "setting.embedding_dim",
+      "computed_path": "settings/embedding_dim",
+      "locations": [
+        {
+          "section": "Implementation and Data",
+          "lines": "274-307",
+          "label": "tab:implementation"
+        }
+      ],
+      "value_type": "int",
+      "decimals": null
+    },
+    {
+      "id": "setting.branching_factor",
+      "computed_path": "settings/branching_factor",
+      "locations": [
+        {
+          "section": "Implementation and Data",
+          "lines": "274-307",
+          "label": "tab:implementation"
+        }
+      ],
+      "value_type": "int",
+      "decimals": null
+    },
+    {
+      "id": "setting.max_depth",
+      "computed_path": "settings/max_depth",
+      "locations": [
+        {
+          "section": "Implementation and Data",
+          "lines": "274-307",
+          "label": "tab:implementation"
+        }
+      ],
+      "value_type": "int",
+      "decimals": null
+    },
+    {
+      "id": "setting.representative",
+      "computed_path": "settings/representative",
+      "locations": [
+        {
+          "section": "Implementation and Data",
+          "lines": "274-307",
+          "label": "tab:implementation"
+        }
+      ],
+      "value_type": "str",
+      "decimals": null
+    },
+    {
+      "id": "setting.top_logprobs",
+      "computed_path": "settings/top_logprobs",
+      "locations": [
+        {
+          "section": "Implementation and Data",
+          "lines": "274-307",
+          "label": "tab:implementation"
+        }
+      ],
+      "value_type": "int",
+      "decimals": null
+    },
+    {
+      "id": "setting.base_max_tokens",
+      "computed_path": "settings/base_max_tokens",
+      "locations": [
+        {
+          "section": "Implementation and Data",
+          "lines": "274-307",
+          "label": "tab:implementation"
+        }
+      ],
+      "value_type": "int",
+      "decimals": null
+    },
+    {
+      "id": "setting.fine_tuned_max_tokens",
+      "computed_path": "settings/fine_tuned_max_tokens",
+      "locations": [
+        {
+          "section": "Implementation and Data",
+          "lines": "274-307",
+          "label": "tab:implementation"
+        }
+      ],
+      "value_type": "int",
+      "decimals": null
+    },
+    {
+      "id": "method.temporal_split",
+      "computed_path": null,
+      "locations": [
+        {
+          "section": "Source Data",
+          "lines": "193"
+        }
+      ],
+      "value_type": "str",
+      "status": "method_description",
+      "description": "Training January 2020 through September 2025; evaluation October 2025"
+    },
+    {
+      "id": "method.local_evaluation",
+      "computed_path": null,
+      "locations": [
+        {
+          "section": "Evaluation Metrics",
+          "lines": "329-342"
+        }
+      ],
+      "value_type": "str",
+      "status": "method_description",
+      "description": "Independent ground-truth-path parent decisions; source-level OR aggregation; no end-to-end traversal"
+    },
+    {
+      "id": "method.fixed_seed_tree",
+      "computed_path": null,
+      "locations": [
+        {
+          "section": "Evaluation Metrics",
+          "lines": "342"
+        },
+        {
+          "section": "Discussion",
+          "lines": "601-606"
+        }
+      ],
+      "value_type": "str",
+      "status": "method_description",
+      "description": "One optimization seed 42 and one fixed evaluation tree shared across models; separate training tree"
+    },
+    {
+      "id": "method.method_figure",
+      "computed_path": null,
+      "locations": [
+        {
+          "section": "Introduction",
+          "lines": "139-149",
+          "label": "fig:method_overview"
+        }
+      ],
+      "value_type": "str",
+      "status": "method_description",
+      "description": "Conceptual supervision and candidate granularity, two panels"
+    },
+    {
+      "id": "method.labels",
+      "computed_path": null,
+      "locations": [
+        {
+          "section": "Implementation and Data",
+          "lines": "319-323"
+        }
+      ],
+      "value_type": "str",
+      "status": "method_description",
+      "description": "Candidate labels A-O follow tree order; deterministic positive for SFT"
+    }
+  ]
+}
