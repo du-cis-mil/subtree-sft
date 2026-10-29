@@ -6,36 +6,48 @@ Run commands from the repository root. The workflow uses separate environments f
 
 The SFT recipe uses three CUDA GPUs, bf16, full-parameter training of DeepSeek-R1-Distill-Qwen-7B, a sequence cutoff of 16,384, and ZeRO-3 parameter/optimizer CPU offload. Host RAM is used for offloaded parameters and optimizer states. A compatible CUDA toolkit and C++ compiler are required for DeepSpeed extensions; configure `CUDA_HOME` to the toolkit matching the installed PyTorch build.
 
+Tested setup: Linux x86_64, CPython 3.11.18, NVIDIA driver 580, three RTX A6000 (48 GB) GPUs and 251 GiB host RAM. Training used up to about 41 GiB per GPU and about 215 GiB host RAM. Prerequisites outside the Python environments:
+
+- **CUDA toolkit 12.6** matching the training PyTorch build (2.7.1+cu126). The tested toolkit contained `nvcc`, cudart, CCCL, cuBLAS and cuRAND with their headers and development libraries. Set `CUDA_HOME` to it and put `$CUDA_HOME/bin` on `PATH`; DeepSpeed compiles CPU-Adam when training starts.
+- **A short `TMPDIR`**, such as `/tmp`. LLaMA-Factory converts the dataset with worker processes that communicate through Unix sockets under `TMPDIR`; a long path exceeds the 108-byte socket path limit and fails with `AF_UNIX path too long`.
+
+`configs/constraints/` lists the complete package set of each tested environment. Add the matching `-c` option shown below to install those exact versions; without it, pip resolves the newest compatible versions at install time.
+
 ### Preparation, tree construction, and evaluation client
 
 ```bash
 python3.11 -m venv .venv
 source .venv/bin/activate
-python -m pip install -e '.[analysis,eval,tree]' 'huggingface_hub>=0.34,<1'
+python -m pip install -e '.[analysis,eval,tree]' 'huggingface_hub>=0.34,<1' \
+  -c configs/constraints/prep-eval.txt
 ```
 
 The tree extra installs the embedding and clustering dependencies. `build_tree` uses CLS embeddings from `allenai/specter2_base` and Flash-KMeans with medoid representatives. Keep this environment active for dataset preparation, evaluation clients, and aggregation.
+
+In the tested environment PyPI resolved PyTorch 2.14.1 built for CUDA 13.0, which needs NVIDIA driver 580 or newer. With an older driver, install a PyTorch build for your CUDA version first and omit the constraint file; tree construction was tested only with the constrained versions.
 
 ### SFT training
 
 ```bash
 python3.11 -m venv .venv-train
 source .venv-train/bin/activate
-python -m pip install -r requirements-training.txt
+python -m pip install -r requirements-training.txt -c configs/constraints/train.txt
 python -m pip install -e .
 ```
 
-The training requirements specify LLaMA-Factory 0.9.3, PyTorch 2.7.1, Transformers 4.52.4, and DeepSpeed 0.16.9. Keep the installed CUDA/PyTorch combination compatible with the driver and extension build tools.
+The training requirements specify LLaMA-Factory 0.9.3, PyTorch 2.7.1, Transformers 4.52.4, DeepSpeed 0.16.9, NumPy 1.26.4 and PyArrow 20.0.0. Newer PyArrow releases require NumPy 2 and cannot be imported with NumPy 1.26.4. Keep the installed CUDA/PyTorch combination compatible with the driver and extension build tools.
 
 ### SGLang serving
 
 ```bash
 python3.11 -m venv .venv-serve
 source .venv-serve/bin/activate
-python -m pip install 'sglang[all]==0.4.9.post6'
+python -m pip install 'sglang[all]==0.4.9.post6' -c configs/constraints/serve.txt
 ```
 
-SGLang 0.4.9.post6 was used for the scaled execution check. Resolve its dependencies for the host CUDA platform using the [SGLang documentation](https://docs.sglang.ai/). Record the resolved versions for your experiment. GPU memory requirements depend on context length, tensor parallelism, and concurrent requests; tune deployment capacity to your hardware while keeping the evaluation context and model declarations consistent.
+SGLang 0.4.9.post6 was used for the GPU execution check. Resolve its dependencies for the host CUDA platform using the [SGLang documentation](https://docs.sglang.ai/). Record the resolved versions for your experiment. GPU memory requirements depend on context length, tensor parallelism, and concurrent requests; tune deployment capacity to your hardware while keeping the evaluation context and model declarations consistent.
+
+`pip check` in this environment may report `decord ... is not supported on this platform`. decord is a video dependency of `sglang[all]` and is not used by the text-only evaluation. Launch servers from the activated environment: the first launch compiles FlashInfer kernels with the environment's `ninja` and caches them under `~/.cache/flashinfer`.
 
 ## 2. Download inputs and build the trees
 
@@ -126,7 +138,7 @@ source .venv/bin/activate
 cp configs/models.example.json configs/models.local.json
 ```
 
-The five deployments below match its served names, context lengths, and ports. Models can be run sequentially on GPU 0. For each deployment, start the server in a separate terminal, wait until it is ready, then run the corresponding evaluation command in the `.venv` terminal. After that evaluation finishes, stop that server with Ctrl-C before starting the next deployment on the same GPU.
+The five deployments below match its served names, context lengths, and ports. Models can be run sequentially on GPU 0. For each deployment, start the server in a separate terminal, wait until it is ready, then run the corresponding evaluation command in the `.venv` terminal. After that evaluation finishes, stop that server with Ctrl-C before starting the next deployment on the same GPU. To finish sooner, run deployments in parallel on different GPUs by changing `CUDA_VISIBLE_DEVICES`; the ports already differ.
 
 The commands use `--tree-profile rebuilt` for trees constructed in step 2. Use `historical` only with the exact tree described in `configs/historical_tree_identity.json`. Evaluation is triggered by `--execute`; omitting it prints the execution plan.
 
@@ -265,6 +277,6 @@ The report produces two figures, four tables, depth-wise accuracy, Top-k metrics
 
 Reports require all seven conditions, five-depth coverage of the same 1,658 sources, consistent model/tree settings, valid corpus counts, and both 10,000-example training audits. Use `--allow-partial` to inspect an unfinished run, with missing fields marked as `NA`.
 
-Top-k uses the best valid positive rank across a source's parent decisions; failed-format parents contribute no rank, and all sources remain in the denominator. Mean/median ranks are conditional on a valid rank. Top-1 uses source-level correctness.
+Top-k uses the best valid positive rank across a source's parent decisions, and all sources remain in the denominator. Mean/median ranks are conditional on a valid rank. Top-1 uses source-level correctness. The public-model Top-k table is written with two rank rules. `public_topk_legacy` is the rule used for the paper's Table 3 and is produced with the default `--profile historical`: a decision whose selection marker was not found keeps the rank of its tied scores, which follows candidate order, so D0 Top-5 is always 100%. `public_topk_corrected` gives such decisions no rank. Top-1 is the same under both rules.
 
 Paired bootstrap uses 5,000 draws, seed 42, a PCG64 generator advanced through D0–D4, sorted source IDs, and linear percentile quantiles. Confidence intervals quantify source-sampling uncertainty. Exact McNemar tests compare paired source outcomes.

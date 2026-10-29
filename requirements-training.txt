@@ -9,4 +9,6 @@ trl==0.9.6
 datasets==3.6.0
 deepspeed==0.16.9
 numpy==1.26.4
+# pyarrow>=21 requires NumPy 2 at import time, which breaks datasets/llamafactory with numpy 1.26.4.
+pyarrow==20.0.0
 tensorboard>=2.14.0

@@ -10,6 +10,13 @@ This repository implements Paper-Selection and Child-Subtree supervised fine-tun
 
 Use Python 3.11 and CUDA-capable GPUs. The training configuration uses **three GPUs**, bf16 full-parameter SFT of a 7B model, a 16,384-token sequence length, and DeepSpeed ZeRO-3 CPU offload. Provision GPU memory and host RAM for this configuration. Tree construction uses GPU embeddings and clustering; model serving also runs on a GPU.
 
+Tested setup: Linux x86_64, CPython 3.11.18, NVIDIA driver 580, three RTX A6000 (48 GB) GPUs and 251 GiB host RAM. Training used up to about 41 GiB per GPU and about 215 GiB host RAM. Before installing, provide:
+
+- a CUDA 12.6 toolkit (`nvcc`, cudart, CCCL, cuBLAS and cuRAND development files) and a C++ compiler; set `CUDA_HOME` to the toolkit. DeepSpeed builds its CPU-Adam extension at the start of training.
+- a short `TMPDIR`, such as `/tmp`. Dataset conversion opens Unix sockets under `TMPDIR`, and a long path exceeds the 108-byte socket path limit.
+
+To install exactly the package versions we tested, add `-c configs/constraints/<environment>.txt` to each install command ([details](docs/reproduction.md#1-environments-and-gpu-requirements)).
+
 ```bash
 git clone https://github.com/du-cis-mil/subtree-sft.git
 cd subtree-sft
@@ -140,14 +147,14 @@ python scripts/run_paper_experiments.py \
 
 Follow the [complete seven-condition GPU schedule](docs/reproduction.md#5-serve-and-evaluate-all-seven-conditions) for the remaining models. It provides the server settings and executable evaluation commands for:
 
-| Model | Conditions | Evaluation context |
-|---|---|---|
-| Backbone | `base_child` | 16,384 |
-| Public MOOSE-Star IR | `public_child`, `public_original` | 16,384 / 32,768 |
-| Paper-Selection SFT | `repro_child`, `repro_original` | 16,384 |
-| Child-Subtree SFT | `child_child`, `child_original` | 16,384 |
+| Model | Name in the paper | Conditions | Evaluation context |
+|---|---|---|---|
+| Backbone | Base | `base_child` | 16,384 |
+| Public MOOSE-Star IR | MOOSE-Star Pub | `public_child`, `public_original` | 16,384 / 32,768 |
+| Paper-Selection SFT | MOOSE-Star Repro | `repro_child`, `repro_original` | 16,384 |
+| Child-Subtree SFT | Child-Subtree SFT | `child_child`, `child_original` | 16,384 |
 
-Models can be served sequentially on the same GPU. Each model's two prompt formats use the same checkpoint. Evaluation covers 1,658 held-out sources and decisions at depths D0–D4.
+The `_child` conditions use the child-subtree-selection evaluation format and the `_original` conditions use the original MOOSE-Star IR format. Models can be served sequentially on the same GPU, or in parallel on different GPUs by changing `CUDA_VISIBLE_DEVICES`; each deployment has its own port. Each model's two prompt formats use the same checkpoint. Evaluation covers 1,658 held-out sources and decisions at depths D0–D4.
 
 ## 7. Generate the paper figures, tables, and statistics
 
@@ -173,7 +180,19 @@ python scripts/make_paper_report.py \
   --corpus-audit outputs/corpus_audit.json
 ```
 
-The report produces two figures, four tables, depth-wise accuracy, Top-k metrics, exact McNemar tests, and paired bootstrap confidence intervals. See the [output inventory](docs/manuscript_coverage.md) for the generated files.
+The report produces two figures, four tables, depth-wise accuracy, Top-k metrics, exact McNemar tests, and paired bootstrap confidence intervals. Files in `outputs/report/` that correspond to the paper:
+
+| Paper | Files | Conditions |
+|---|---|---|
+| Fig. 1 (method overview) | `method_overview.*`, two concept PNGs | — |
+| Fig. 2 (depth-wise Top-1) | `depthwise.csv`, `depthwise_figure.*` | `base_child`, `repro_original`, `child_child` |
+| Table 1 (implementation) | `implementation.*`, `training_coverage.*` | — |
+| Table 2 (tree granularity) | `tree_granularity.*` | — |
+| Table 3 (public-model Top-k) | `public_topk_legacy.*` | `public_child` |
+| Table 4 (format comparison) | `ablation.*` | all except `base_child` |
+| Paired CIs and McNemar tests | `paired_tests.*`, `main_paired_statistics.json` | `child_child` vs `repro_original` |
+
+Table 3 uses the paper's rank rule (`--profile historical`, the default), which also ranks decisions whose selection marker was not found. `public_topk_corrected.*` gives the same table with those decisions unranked. See the [output inventory](docs/manuscript_coverage.md) for all generated files.
 
 ## Citation and license
 
